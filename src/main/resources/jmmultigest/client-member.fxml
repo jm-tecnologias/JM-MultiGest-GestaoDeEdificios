@@ -65,7 +65,7 @@
             </HBox>
          </children>
       </VBox>
-      <SplitPane dividerPositions="0.6353383458646616" layoutX="108.0" layoutY="140.0" prefHeight="204.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <SplitPane dividerPositions="0.6353383458646616" layoutX="108.0" layoutY="140.0" prefHeight="226.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -76,7 +76,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tabelaCliente" styleClass="management-table">
+                        <TableView fx:id="tabelaCliente" onMouseClicked="#selecionaCliente" styleClass="management-table">
                            <columns>
                               <TableColumn fx:id="idColumnCliente" prefWidth="47.0" text="ID" />
                               <TableColumn fx:id="nomeColumnCliente" prefWidth="172.0" text="Cliente" />
@@ -98,7 +98,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tabelaHistorico" prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="tabelaHistorico" onMouseClicked="#selecionaHistorico" prefHeight="200.0" prefWidth="200.0">
                           <columns>
                             <TableColumn fx:id="apartamentoColumnHistorico" prefWidth="121.0" text="Apartamento" />
                             <TableColumn fx:id="entradaColumnHistorico" prefWidth="66.0" text="Entrada" />
@@ -111,28 +111,28 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <TextArea editable="false" layoutX="392.0" layoutY="370.0" prefHeight="70.0" prefWidth="403.0" wrapText="true" AnchorPane.rightAnchor="5.0" />
-      <Label layoutX="58.0" layoutY="390.0" text="Detalhes do Apartamento">
+      <TextArea fx:id="textAreaDescricao" editable="false" layoutX="392.0" layoutY="393.0" prefHeight="70.0" prefWidth="403.0" wrapText="true" AnchorPane.rightAnchor="5.0" />
+      <Label layoutX="58.0" layoutY="413.0" text="Detalhes do Apartamento">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="451.0" text="Piso / Bloco:">
+      <Label layoutX="20.0" layoutY="470.0" text="Piso / Bloco:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="170.0" layoutY="451.0" prefHeight="20.0" prefWidth="168.0" text="Label">
+      <Label fx:id="pisoBlocoLabel" layoutX="170.0" layoutY="470.0" prefHeight="20.0" prefWidth="168.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="350.0" layoutY="451.0" text="Numero:">
+      <Label layoutX="350.0" layoutY="470.0" text="Numero:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="430.0" layoutY="451.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+      <Label fx:id="numeroLabel" layoutX="430.0" layoutY="470.0" prefHeight="20.0" prefWidth="95.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
@@ -142,7 +142,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="170.0" layoutY="501.0" prefHeight="20.0" prefWidth="168.0" text="Label">
+      <Label fx:id="tipoApartamentoLabel" layoutX="170.0" layoutY="501.0" prefHeight="20.0" prefWidth="168.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
@@ -152,13 +152,13 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="430.0" layoutY="501.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+      <Label fx:id="estadoLabel" layoutX="430.0" layoutY="501.0" prefHeight="20.0" prefWidth="95.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="537.0" layoutY="453.0" prefHeight="76.0" prefWidth="251.0" text="Descrição" wrapText="true" />
-      <Label layoutX="392.0" layoutY="347.0" text="Descrição Cliente / Historico">
+      <Label fx:id="descricaoLabel" alignment="TOP_LEFT" layoutX="537.0" layoutY="470.0" prefHeight="59.0" prefWidth="251.0" text="Descrição" wrapText="true" />
+      <Label layoutX="392.0" layoutY="370.0" text="Descrição Cliente / Historico">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

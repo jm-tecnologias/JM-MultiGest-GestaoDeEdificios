@@ -14,9 +14,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import jmmultigest.client.ClientModel;
 import jmmultigest.client.ClientService;
@@ -43,6 +46,13 @@ public class ClientController implements Initializable{
     @FXML private TableColumn<HistoricApartmentModel, String> saidaColumnHistorico;
     private ObservableList<HistoricApartmentModel> listaHistorico;
     private HistoricService historicoService;
+    
+    @FXML private TextArea textAreaDescricao;
+    @FXML private Label pisoBlocoLabel;
+    @FXML private Label numeroLabel;
+    @FXML private Label descricaoLabel;
+    @FXML private Label tipoApartamentoLabel;
+    @FXML private Label estadoLabel;
     
 
     @Override
@@ -99,6 +109,27 @@ public class ClientController implements Initializable{
         apartamentoColumnHistorico.setCellValueFactory(cellData -> new SimpleStringProperty("P/B: "+cellData.getValue().getApartment().getNumber()+" Nr: "+cellData.getValue().getApartment().getNumber()));
         entradaColumnHistorico.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHistoric().getOccupational_date()));
         saidaColumnHistorico.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHistoric().getFinal_date()));
+    }
+    
+    @FXML
+    void selecionaCliente(MouseEvent event){
+        ClientModel x = tabelaCliente.getSelectionModel().getSelectedItem();
+        if(x != null){
+            textAreaDescricao.setText(x.getDescription());
+        }
+    }
+    
+    @FXML
+    void selecionaHistorico(MouseEvent event){
+        HistoricApartmentModel x = tabelaHistorico.getSelectionModel().getSelectedItem();
+        if(x != null){
+            textAreaDescricao.setText(x.getHistoric().getDescription());
+            pisoBlocoLabel.setText(x.getApartment().getFloor());
+            numeroLabel.setText(x.getApartment().getNumber());
+            descricaoLabel.setText(x.getApartment().getDescription());
+            tipoApartamentoLabel.setText(x.getApartment().getType());
+            estadoLabel.setText(x.getApartment().getOccupation_state());
+        }
     }
     private void fetchData() {
         Thread thread = new Thread(() -> {
