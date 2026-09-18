@@ -112,13 +112,13 @@
                                     <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                        <children>
                                           <Label styleClass="field-label" text="Apartamento *" />
-                                          <ComboBox fx:id="apartamentoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccionar cliente" styleClass="form-input" />
+                                          <ComboBox fx:id="apartamentoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccione o apartamento" styleClass="form-input" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                        <children>
                                           <Label styleClass="field-label" text="Estado *" />
-                                          <ComboBox fx:id="estadoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccionar apartamento" styleClass="form-input" />
+                                          <ComboBox fx:id="estadoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccione o estado" styleClass="form-input" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0" GridPane.rowIndex="1">
@@ -167,7 +167,7 @@
                     <children>
                         <Label styleClass="form-required-note" text="* Campos obrigatórios" />
                         <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="cancelarClienteButton" minWidth="100.0" mnemonicParsing="false" styleClass="secondary-button" text="Cancelar" />
+                        <Button fx:id="cancelarClienteButton" minWidth="100.0" mnemonicParsing="false" onAction="#close" styleClass="secondary-button" text="Cancelar" />
                         <Button fx:id="guardarClienteButton" minWidth="130.0" mnemonicParsing="false" styleClass="primary-button" text="Guardar Cliente" />
                     </children>
                 </HBox>

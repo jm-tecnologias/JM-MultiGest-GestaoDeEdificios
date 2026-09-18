@@ -36,7 +36,7 @@
                      </children>
                   </VBox>
                   <Region minWidth="0.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="primary-button" text="Novo Cliente">
+                  <Button mnemonicParsing="false" onAction="#openNovoCliente" styleClass="primary-button" text="Novo Cliente">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

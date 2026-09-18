@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,14 +22,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
-import jmmultigest.building.BuildingService;
 import jmmultigest.client.ClientModel;
 import jmmultigest.client.ClientService;
 import jmmultigest.historic.HistoricApartmentModel;
 import jmmultigest.historic.HistoricService;
 import jmmultigest.utils.DataTransfer;
+import jmmultigest.utils.LoadAndMoveUtilities;
 
 /**
  *
@@ -79,6 +81,12 @@ public class ClientController implements Initializable{
         } catch (InterruptedException ex) {
             System.out.println("Erro (InterruptedException) Inicializando servico Cliente: "+ex);
         }
+    }
+    
+    @FXML
+    void openNovoCliente(ActionEvent e){
+        LoadAndMoveUtilities.showAsPopUP(e, null);
+        LoadAndMoveUtilities.loadFXML(Modality.APPLICATION_MODAL, "/jmmultigest/novo-cliente.fxml");
     }
     
     void setTableWidth(){
