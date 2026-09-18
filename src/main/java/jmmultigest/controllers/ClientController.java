@@ -21,16 +21,23 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import jmmultigest.auth.UserEmployeeModel;
+import jmmultigest.building.BuildModel;
+import jmmultigest.building.BuildingService;
 import jmmultigest.client.ClientModel;
 import jmmultigest.client.ClientService;
 import jmmultigest.historic.HistoricApartmentModel;
 import jmmultigest.historic.HistoricService;
+import jmmultigest.utils.DataTransfer;
 
 /**
  *
  * @author JM-Tecnologias
  */
 public class ClientController implements Initializable{
+    private UserEmployeeModel user;
+    private BuildModel build;
+    
     @FXML private TableView<ClientModel> tabelaCliente;
     @FXML private TableColumn<ClientModel, Integer> idColumnCliente;
     @FXML private TableColumn<ClientModel, String> nomeColumnCliente;
@@ -57,6 +64,9 @@ public class ClientController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        user = DataTransfer.getUserData();
+        build = DataTransfer.getBuildingData();
+        
         try {
             setTableWidth();
             clientService = new ClientService();
