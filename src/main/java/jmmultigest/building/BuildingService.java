@@ -26,7 +26,7 @@ public class BuildingService {
         this.objectMapper = new ObjectMapper();
     }
     
-    public List<BuildModel> getBuildingData() throws IOException, InterruptedException{
+    public List<BuildModel> listBuildings() throws IOException, InterruptedException{
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(API_URL + "/building/list-all"))
@@ -41,19 +41,46 @@ public class BuildingService {
         
         return objectMapper.readValue(jsonResponse,
                 new TypeReference<List<BuildModel>>(){});
+    }
+    
+    public BuildModel getBuildingData(int building_id) throws IOException, InterruptedException{
+        HttpRequest request = HttpRequest
+                .newBuilder()
+                .uri(URI.create(API_URL + "/building/get/"+building_id))
+                .GET()
+                .build();
+        HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString()
+        );
+        String jsonResponse = response.body();
+        System.out.println("Resposta: "+jsonResponse);
         
+        return objectMapper.readValue(jsonResponse, BuildModel.class);
     }
     
 //    public static void main(String[] args) throws IOException, InterruptedException {
 //        BuildingService service = new BuildingService();
 //        
 //        try {
-//            List<BuildModel> buildings = service.getBuildingData();
+//            List<BuildModel> buildings = service.listBuildings();
 //            for(BuildModel b: buildings){
 //                
 //                System.out.println("_________________________");
 //                System.out.println(b.getApartments().size());
 //            }
+//        } catch (Exception e) {
+//            System.err.println("Erro ao consumir API:");
+//            e.printStackTrace();
+//        } 
+//    }
+    
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        BuildingService service = new BuildingService();
+//        
+//        try {
+//            BuildModel building = service.getBuildingData(1);
+//            
 //        } catch (Exception e) {
 //            System.err.println("Erro ao consumir API:");
 //            e.printStackTrace();
