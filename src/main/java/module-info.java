@@ -13,6 +13,7 @@ module jmmultigest {
     exports jmmultigest.controllers;
     exports jmmultigest.department;
     exports jmmultigest.employee;
+    exports jmmultigest.historic;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires java.net.http;

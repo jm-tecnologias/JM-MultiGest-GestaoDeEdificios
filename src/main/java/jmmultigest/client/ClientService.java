@@ -38,7 +38,7 @@ public class ClientService {
                 HttpResponse.BodyHandlers.ofString()
         );
         String jsonResponse = response.body();
-        System.out.println("Resposta: "+jsonResponse);
+//        System.out.println("Resposta: "+jsonResponse);
         
         return objectMapper.readValue(jsonResponse,
                 new TypeReference<List<ClientModel>>(){});

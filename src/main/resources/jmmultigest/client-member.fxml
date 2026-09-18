@@ -65,7 +65,7 @@
             </HBox>
          </children>
       </VBox>
-      <SplitPane dividerPositions="0.681704260651629" layoutX="108.0" layoutY="140.0" prefHeight="204.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <SplitPane dividerPositions="0.6353383458646616" layoutX="108.0" layoutY="140.0" prefHeight="204.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -98,11 +98,11 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="tabelaHistorico" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn prefWidth="99.0" text="Apartamento" />
-                            <TableColumn prefWidth="76.0" text="Entrada" />
-                              <TableColumn prefWidth="60.0" text="Saida" />
+                            <TableColumn fx:id="apartamentoColumnHistorico" prefWidth="121.0" text="Apartamento" />
+                            <TableColumn fx:id="entradaColumnHistorico" prefWidth="66.0" text="Entrada" />
+                              <TableColumn fx:id="saidaColumnHistorico" prefWidth="63.0" text="Saida" />
                           </columns>
                         </TableView>
                      </children>
