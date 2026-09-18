@@ -5,17 +5,53 @@
 package jmmultigest.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import jmmultigest.App;
+import jmmultigest.auth.UserEmployeeModel;
+import jmmultigest.auth.UserModel;
+import jmmultigest.auth.UserService;
 
 /**
  *
  * @author JM-Tecnologias
  */
-public class LoginController {
+public class LoginController implements Initializable{
+    
+    @FXML private PasswordField passwordPasswordField;
+    @FXML private TextField usernameTextField;
+    
+    private UserService userService;
 
+//    @FXML
+//    private void switchToDashboar() throws IOException {
+//        App.setRoot("dashboar");
+//    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            userService = new UserService();
+        } catch (IOException ex) {
+            System.out.println("Erro (IOException) inicializando servico de user"+ ex);
+        } catch (InterruptedException ex) {
+            System.out.println("Erro (InterruptedException) inicializando servico de user"+ ex);
+        }
+    }
+    
     @FXML
-    private void switchToDashboar() throws IOException {
-        App.setRoot("dashboar");
+    void login(ActionEvent event) throws IOException, InterruptedException{
+        UserModel user = new UserModel();
+        user.setUsername(usernameTextField.getText());
+        user.setPassword(passwordPasswordField.getText());
+        
+        UserEmployeeModel x = userService.login(user);
+        System.out.println("Teste: "+x.getEmployee().getDescription());
+        
     }
 }

@@ -99,7 +99,6 @@ public class ClientController implements Initializable{
         nomeColumnCliente.setCellValueFactory(new PropertyValueFactory<>("surname"));
         membrosColumnCliente.setCellValueFactory(new PropertyValueFactory<>("num_members"));
         estadoColumnCliente.setCellValueFactory(new PropertyValueFactory<>("status"));
-        
 //        accoesColumnCliente 
     }
     

@@ -44,21 +44,21 @@ public class BuildingService {
         
     }
     
-    public static void main(String[] args) throws IOException, InterruptedException {
-        BuildingService service = new BuildingService();
-        
-        try {
-            List<BuildModel> buildings = service.getBuildingData();
-            for(BuildModel b: buildings){
-                
-                System.out.println("_________________________");
-                System.out.println(b.getApartments().size());
-            }
-        } catch (Exception e) {
-            System.err.println("Erro ao consumir API:");
-            e.printStackTrace();
-        } 
-    }
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        BuildingService service = new BuildingService();
+//        
+//        try {
+//            List<BuildModel> buildings = service.getBuildingData();
+//            for(BuildModel b: buildings){
+//                
+//                System.out.println("_________________________");
+//                System.out.println(b.getApartments().size());
+//            }
+//        } catch (Exception e) {
+//            System.err.println("Erro ao consumir API:");
+//            e.printStackTrace();
+//        } 
+//    }
 
     
 }
