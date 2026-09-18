@@ -56,7 +56,8 @@ public class UserService {
 
         if (response.statusCode() != 200
                 && response.statusCode() != 201) {
-
+            
+            
             throw new RuntimeException(
                     "HTTP ERRO: "
                     + response.statusCode()

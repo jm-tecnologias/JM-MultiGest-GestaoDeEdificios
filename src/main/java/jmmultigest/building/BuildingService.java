@@ -37,7 +37,7 @@ public class BuildingService {
                 HttpResponse.BodyHandlers.ofString()
         );
         String jsonResponse = response.body();
-        System.out.println("Resposta: "+jsonResponse);
+//        System.out.println("Resposta: "+jsonResponse);
         
         return objectMapper.readValue(jsonResponse,
                 new TypeReference<List<BuildModel>>(){});
@@ -54,7 +54,7 @@ public class BuildingService {
                 HttpResponse.BodyHandlers.ofString()
         );
         String jsonResponse = response.body();
-        System.out.println("Resposta: "+jsonResponse);
+//        System.out.println("Resposta: "+jsonResponse);
         
         return objectMapper.readValue(jsonResponse, BuildModel.class);
     }

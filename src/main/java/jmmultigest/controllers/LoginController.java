@@ -12,10 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import jmmultigest.App;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.auth.UserModel;
 import jmmultigest.auth.UserService;
+import jmmultigest.utils.DataTransfer;
+import jmmultigest.utils.LoadAndMoveUtilities;
 
 /**
  *
@@ -49,9 +52,11 @@ public class LoginController implements Initializable{
         UserModel user = new UserModel();
         user.setUsername(usernameTextField.getText());
         user.setPassword(passwordPasswordField.getText());
-        
         UserEmployeeModel x = userService.login(user);
-        System.out.println("Teste: "+x.getEmployee().getDescription());
-        
+        if( x != null && 
+                userService.login(user) instanceof UserEmployeeModel){
+            DataTransfer.setUserData(x);
+            App.setRoot("main");
+        }       
     }
 }

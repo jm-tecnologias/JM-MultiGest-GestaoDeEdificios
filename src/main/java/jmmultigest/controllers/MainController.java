@@ -13,12 +13,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import jmmultigest.auth.UserEmployeeModel;
+import jmmultigest.building.BuildModel;
+import jmmultigest.building.BuildingService;
+import jmmultigest.utils.DataTransfer;
 
 /**
  *
  * @author JM-Tecnologias
  */
 public class MainController implements Initializable {
+    private BuildingService buildService;
+    private UserEmployeeModel user;
+    private BuildModel build;
 
     @FXML
     private AnchorPane mainViewer;
@@ -54,6 +61,16 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        user = DataTransfer.getUserData();
+        try {
+            buildService = new BuildingService();
+            build = buildService.getBuildingData(user.getEmployee().getBuilding_id());
+            DataTransfer.setBuildingData(build);
+        } catch (IOException ex) {
+            System.out.println("Erro (IOException) ao inicializar servico Building no dashboar "+ex);
+        } catch (InterruptedException ex) {
+            System.out.println("Erro (InterruptedException) ao inicializar servico Building no dashboar "+ex);
+        }
     }
 
 }
