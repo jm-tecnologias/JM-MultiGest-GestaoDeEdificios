@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.ClientController">
+   <children>
+      <VBox minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="790.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <HBox alignment="CENTER" minWidth="0.0" prefHeight="59.0" prefWidth="800.0" styleClass="page-header">
+               <children>
+                  <VBox alignment="CENTER_LEFT" minWidth="170.0" prefHeight="53.0" prefWidth="282.0" styleClass="page-heading">
+                     <children>
+                        <Label styleClass="page-title" text="Cliente e membros">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="page-subtitle" text="Gestão de clientes e membros do edificio">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Region minWidth="0.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" styleClass="primary-button" text="Novo Cliente">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Region prefHeight="53.0" prefWidth="20.0" />
+                  <Button mnemonicParsing="false" styleClass="primary-button" text="Novo Membro">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Region minHeight="8.0" prefHeight="29.0" prefWidth="800.0" />
+            <HBox minWidth="0.0" prefHeight="30.0" prefWidth="800.0" spacing="30.0" styleClass="filter-row">
+               <children>
+                  <TextField minWidth="120.0" prefHeight="25.0" prefWidth="375.0" styleClass="filter-field" HBox.hgrow="ALWAYS" />
+                  <ComboBox minWidth="100.0" prefWidth="150.0" styleClass="filter-combo" />
+                  <ComboBox minWidth="100.0" prefWidth="150.0" styleClass="filter-combo" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <SplitPane dividerPositions="0.681704260651629" layoutX="108.0" layoutY="140.0" prefHeight="204.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Clientes">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tabelaCliente" styleClass="management-table">
+                           <columns>
+                              <TableColumn fx:id="idColumnCliente" prefWidth="47.0" text="ID" />
+                              <TableColumn fx:id="nomeColumnCliente" prefWidth="172.0" text="Cliente" />
+                              <TableColumn fx:id="membrosColumnCliente" prefWidth="95.0" text="Membros" />
+                              <TableColumn fx:id="estadoColumnCliente" prefWidth="108.0" text="Estado" />
+                              <TableColumn fx:id="accoesColumnCliente" prefWidth="116.0" text="Ação" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox layoutX="14.0" layoutY="1.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Historico Ocupacional">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn prefWidth="99.0" text="Apartamento" />
+                            <TableColumn prefWidth="76.0" text="Entrada" />
+                              <TableColumn prefWidth="60.0" text="Saida" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <TextArea editable="false" layoutX="392.0" layoutY="370.0" prefHeight="70.0" prefWidth="403.0" wrapText="true" AnchorPane.rightAnchor="5.0" />
+      <Label layoutX="58.0" layoutY="390.0" text="Detalhes do Apartamento">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="451.0" text="Piso / Bloco:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="170.0" layoutY="451.0" prefHeight="20.0" prefWidth="168.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="350.0" layoutY="451.0" text="Numero:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="430.0" layoutY="451.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="501.0" text="Tipo de apartamento:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="170.0" layoutY="501.0" prefHeight="20.0" prefWidth="168.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="350.0" layoutY="501.0" text="Estado:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="430.0" layoutY="501.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="537.0" layoutY="453.0" prefHeight="76.0" prefWidth="251.0" text="Descrição" wrapText="true" />
+      <Label layoutX="392.0" layoutY="347.0" text="Descrição Cliente / Historico">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

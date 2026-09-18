@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.ApartamentoController">
+   <children>
+      <VBox minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <HBox alignment="CENTER" minWidth="0.0" prefHeight="59.0" prefWidth="800.0" styleClass="page-header">
+               <children>
+                  <VBox alignment="CENTER_LEFT" minWidth="170.0" prefHeight="59.0" prefWidth="245.0" styleClass="page-heading">
+                     <children>
+                        <Label styleClass="page-title" text="Apartamentos">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="page-subtitle" text="Gestão de apartamentos do edificio">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Region minWidth="0.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#getView" styleClass="primary-button" text="Novo Apartamento">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Region minHeight="8.0" prefHeight="29.0" prefWidth="800.0" />
+            <HBox minWidth="0.0" prefHeight="30.0" prefWidth="800.0" spacing="30.0" styleClass="filter-row">
+               <children>
+                  <TextField minWidth="120.0" prefHeight="25.0" prefWidth="375.0" styleClass="filter-field" HBox.hgrow="ALWAYS" />
+                  <ComboBox minWidth="100.0" prefWidth="150.0" styleClass="filter-combo" />
+                  <ComboBox minWidth="100.0" prefWidth="150.0" styleClass="filter-combo" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+            <Region minHeight="8.0" prefHeight="29.0" prefWidth="800.0" />
+            <TableView minHeight="120.0" minWidth="0.0" prefHeight="432.0" prefWidth="800.0" styleClass="management-table" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn prefWidth="47.0" text="ID" />
+                <TableColumn prefWidth="78.0" text="Andar" />
+                  <TableColumn prefWidth="93.0" text="Numero" />
+                  <TableColumn prefWidth="112.0" text="Tipo" />
+                  <TableColumn prefWidth="115.0" text="Estado" />
+                  <TableColumn prefWidth="197.0" text="Descrição" />
+                  <TableColumn prefWidth="145.0" text="Ação" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

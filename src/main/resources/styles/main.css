@@ -1,0 +1,106 @@
+/*
+ * JM MultiGest — Responsive application shell
+ * Building-management palette: deep navy to medium blue.
+ */
+
+.app-header {
+    -fx-background-color: #0B2742;
+    -fx-border-color: transparent transparent #244F73 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.sidebar-scroll,
+.sidebar-scroll > .viewport,
+.sidebar-menu {
+    -fx-background-color: #102F4A;
+}
+
+.brand-title,
+.user-name {
+    -fx-text-fill: #FFFFFF;
+}
+
+.header-secondary {
+    -fx-text-fill: #B8D0E2;
+}
+
+.brand-title {
+    -fx-font-family: "System";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.user-name {
+    -fx-font-family: "System";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.header-secondary {
+    -fx-font-family: "System";
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}
+
+.sidebar-scroll {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+}
+
+.sidebar-scroll:focused {
+    -fx-background-insets: 0;
+}
+
+.sidebar-scroll > .viewport {
+    -fx-background-insets: 0;
+}
+
+.sidebar-menu {
+    -fx-padding: 6px 0 8px 0;
+}
+
+.sidebar-button {
+    -fx-font-family: "System";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #DCEAF4;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-color: transparent;
+    -fx-padding: 9px 10px 9px 8px;
+    -fx-cursor: hand;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #17466B;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #4B8FBE;
+}
+
+.sidebar-button:focused {
+    -fx-background-color: #1C527B;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #70A9D0;
+}
+
+/* Sidebar vertical scrollbar */
+.sidebar-scroll .scroll-bar:vertical {
+    -fx-background-color: #102F4A;
+    -fx-pref-width: 8px;
+}
+
+.sidebar-scroll .scroll-bar:vertical .track {
+    -fx-background-color: #102F4A;
+}
+
+.sidebar-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #3B739B;
+    -fx-background-radius: 0;
+}
+
+.sidebar-scroll .corner {
+    -fx-background-color: #102F4A;
+}

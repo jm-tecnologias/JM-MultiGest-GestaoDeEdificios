@@ -1,0 +1,141 @@
+/*
+ * JM MultiGest — Login
+ * Same building-management visual language used by main.css / management.css.
+ */
+
+.login-root {
+    -fx-background-color: #F4F8FC;
+    -fx-font-family: "System";
+}
+
+/* ---------- Left / institutional panel ---------- */
+.login-brand-panel {
+    -fx-background-color: #0B2742;
+    -fx-border-color: transparent #244F73 transparent transparent;
+    -fx-border-width: 0 1px 0 0;
+}
+
+.login-brand-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+}
+
+.login-brand-subtitle {
+    -fx-text-fill: #AFC9DC;
+    -fx-font-size: 13px;
+}
+
+.login-hero-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-line-spacing: 2px;
+}
+
+.login-hero-copy {
+    -fx-text-fill: #B8D0E2;
+    -fx-font-size: 14px;
+}
+
+.login-accent-line {
+    -fx-background-color: #4B8FBE;
+}
+
+.login-brand-footer-text {
+    -fx-text-fill: #86AFCB;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Right / authentication area ---------- */
+.login-form-stage {
+    -fx-background-color: #F4F8FC;
+}
+
+.login-card {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF;
+    -fx-border-width: 1px;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(gaussian, rgba(11, 39, 66, 0.10), 18, 0.12, 0, 5);
+}
+
+.login-title {
+    -fx-text-fill: #0B2742;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.login-subtitle {
+    -fx-text-fill: #6B879C;
+    -fx-font-size: 13px;
+}
+
+.login-field-label {
+    -fx-text-fill: #315C7C;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.login-input {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+    -fx-border-color: #BFD2E0;
+    -fx-border-radius: 0;
+    -fx-border-width: 1px;
+    -fx-padding: 0 11px;
+    -fx-text-fill: #173F60;
+    -fx-prompt-text-fill: #829AAA;
+    -fx-font-size: 13px;
+}
+
+.login-input:hover {
+    -fx-border-color: #91B2CA;
+}
+
+.login-input:focused {
+    -fx-border-color: #1E5A86;
+    -fx-border-width: 1.4px;
+}
+
+.login-primary-button {
+    -fx-background-color: #1E5A86;
+    -fx-background-radius: 0;
+    -fx-border-color: #1E5A86;
+    -fx-border-radius: 0;
+    -fx-border-width: 1px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.login-primary-button:hover {
+    -fx-background-color: #17466B;
+    -fx-border-color: #17466B;
+}
+
+.login-primary-button:pressed {
+    -fx-background-color: #0F3858;
+    -fx-border-color: #0F3858;
+}
+
+.login-link-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 6px 4px;
+    -fx-text-fill: #315C7C;
+    -fx-font-size: 11px;
+    -fx-cursor: hand;
+}
+
+.login-link-button:hover {
+    -fx-text-fill: #1E5A86;
+    -fx-underline: true;
+}
+
+.login-link-button:pressed {
+    -fx-text-fill: #0F3858;
+}

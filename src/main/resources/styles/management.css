@@ -1,0 +1,337 @@
+/*
+ * JM MultiGest — Shared management screens
+ * Building-management visual system: deep navy → medium blue.
+ * Designed to complement main.css and dashboard.css.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #F4F8FC;
+    -fx-font-family: "System";
+}
+
+/* ---------- Page headers ---------- */
+.page-header {
+    -fx-background-color: transparent;
+}
+
+.page-heading {
+    -fx-background-color: transparent;
+}
+
+.page-title,
+.page-title-small {
+    -fx-text-fill: #0B2742;
+    -fx-font-weight: bold;
+}
+
+.page-title {
+    -fx-font-size: 20px;
+}
+
+.page-title-small {
+    -fx-font-size: 18px;
+}
+
+.page-subtitle {
+    -fx-text-fill: #55758D;
+    -fx-font-size: 13px;
+}
+
+.page-date {
+    -fx-text-fill: #244F73;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.page-time {
+    -fx-text-fill: #5B7F9C;
+    -fx-font-size: 13px;
+}
+
+/* ---------- Buttons ---------- */
+.primary-button,
+.secondary-button,
+.mainFxmlClass .button {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.primary-button,
+.mainFxmlClass .button {
+    -fx-background-color: #1E5A86;
+    -fx-border-color: #1E5A86;
+    -fx-text-fill: #FFFFFF;
+}
+
+.primary-button:hover,
+.mainFxmlClass .button:hover {
+    -fx-background-color: #17466B;
+    -fx-border-color: #17466B;
+}
+
+.primary-button:pressed,
+.mainFxmlClass .button:pressed {
+    -fx-background-color: #0F3858;
+    -fx-border-color: #0F3858;
+}
+
+.mainFxmlClass .secondary-button {
+    -fx-background-color: #E7F0F7;
+    -fx-border-color: #B9CFDF;
+    -fx-text-fill: #173F60;
+}
+
+.mainFxmlClass .secondary-button:hover {
+    -fx-background-color: #D7E7F2;
+    -fx-border-color: #7EA8C6;
+}
+
+/* ---------- Inputs / filters ---------- */
+.filter-row {
+    -fx-alignment: center-left;
+}
+
+.mainFxmlClass .text-field,
+.mainFxmlClass .combo-box-base,
+.mainFxmlClass .text-area {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+    -fx-border-color: #BFD2E0;
+    -fx-border-radius: 0;
+    -fx-border-width: 1px;
+    -fx-text-fill: #173F60;
+    -fx-prompt-text-fill: #7D98AB;
+}
+
+.mainFxmlClass .text-field:focused,
+.mainFxmlClass .combo-box-base:focused,
+.mainFxmlClass .text-area:focused {
+    -fx-border-color: #1E5A86;
+}
+
+.mainFxmlClass .combo-box-base .arrow-button {
+    -fx-background-color: #E7F0F7;
+    -fx-background-radius: 0;
+}
+
+.mainFxmlClass .combo-box-base .arrow {
+    -fx-background-color: #315C7C;
+}
+
+/* ---------- Shared tables ---------- */
+.management-table {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF;
+    -fx-border-width: 1px;
+    -fx-table-cell-border-color: #E5EDF4;
+    -fx-padding: 0;
+}
+
+.management-table .column-header-background {
+    -fx-background-color: #173F60;
+    -fx-background-insets: 0;
+}
+
+.management-table .column-header,
+.management-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent #315D7D transparent transparent;
+    -fx-border-width: 0 1px 0 0;
+    -fx-size: 35px;
+}
+
+.management-table .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+
+.management-table .table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #E9F0F6 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.management-table .table-row-cell:odd {
+    -fx-background-color: #F8FBFD;
+}
+
+.management-table .table-row-cell:hover {
+    -fx-background-color: #EEF5FA;
+}
+
+.management-table .table-row-cell:selected {
+    -fx-background-color: #DCEAF5;
+}
+
+.management-table .table-cell {
+    -fx-text-fill: #365A74;
+    -fx-font-size: 11px;
+    -fx-padding: 7px 8px;
+}
+
+.management-table .placeholder .label {
+    -fx-text-fill: #7E98AB;
+}
+
+
+/* ---------- Portaria / Segurança ---------- */
+.scanner-panel,
+.security-detail-panel,
+.history-panel {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF;
+    -fx-border-width: 1px;
+}
+
+.section-title,
+.section-title-small,
+.history-title {
+    -fx-text-fill: #123B5D;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-font-size: 14px;
+}
+
+.section-title-small,
+.history-title {
+    -fx-font-size: 13px;
+}
+
+.identity-block {
+    -fx-background-color: #F8FBFD;
+    -fx-border-color: #E0EAF2;
+    -fx-border-width: 1px;
+    -fx-padding: 6px 8px;
+}
+
+.location-block {
+    -fx-background-color: #F8FBFD;
+    -fx-border-color: #E0EAF2;
+    -fx-border-width: 1px;
+    -fx-padding: 8px 10px;
+}
+
+.identity-block .label,
+.location-block .label {
+    -fx-text-fill: #365A74;
+}
+
+.access-toggle {
+    -fx-background-color: #E7F0F7;
+    -fx-background-radius: 0;
+    -fx-border-color: #B9CFDF;
+    -fx-border-radius: 0;
+    -fx-text-fill: #315C7C;
+    -fx-font-weight: bold;
+}
+
+.access-toggle:hover {
+    -fx-background-color: #DCEAF5;
+}
+
+.access-toggle:selected {
+    -fx-background-color: #1E5A86;
+    -fx-border-color: #1E5A86;
+    -fx-text-fill: #FFFFFF;
+}
+
+.notes-area {
+    -fx-control-inner-background: #FFFFFF;
+}
+
+/* ---------- Scrollbars ---------- */
+.mainFxmlClass .scroll-bar:vertical,
+.mainFxmlClass .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.mainFxmlClass .scroll-bar .track {
+    -fx-background-color: #EDF3F8;
+    -fx-background-radius: 0;
+}
+
+.mainFxmlClass .scroll-bar .thumb {
+    -fx-background-color: #7FA9C8;
+    -fx-background-radius: 0;
+}
+
+/* ---------- Create / edit forms ---------- */
+.form-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.form-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.form-content {
+    -fx-background-color: transparent;
+}
+
+.form-card {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF;
+    -fx-border-width: 1px;
+    -fx-padding: 14px 16px;
+}
+
+.form-section-title {
+    -fx-text-fill: #123B5D;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.form-section-subtitle {
+    -fx-text-fill: #6B879C;
+    -fx-font-size: 11px;
+}
+
+.field-label {
+    -fx-text-fill: #315C7C;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.form-input,
+.form-textarea {
+    -fx-font-size: 12px;
+}
+
+.form-input {
+    -fx-pref-height: 34px;
+}
+
+.form-textarea {
+    -fx-control-inner-background: #FFFFFF;
+}
+
+.form-actions {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+    -fx-padding: 10px 12px;
+}
+
+.form-required-note {
+    -fx-text-fill: #7891A4;
+    -fx-font-size: 10px;
+}
+
+.form-context-badge {
+    -fx-background-color: #E7F0F7;
+    -fx-border-color: #B9CFDF;
+    -fx-border-width: 1px;
+    -fx-padding: 5px 9px;
+    -fx-text-fill: #315C7C;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}

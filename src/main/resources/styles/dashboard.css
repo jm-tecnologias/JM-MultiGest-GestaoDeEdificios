@@ -1,0 +1,259 @@
+/*
+ * JM MultiGest — Dashboard
+ * Responsive visual layer for building/property management.
+ * Layout structure remains defined by dashboard.fxml.
+ */
+
+.mainFxmlClass,
+.dashboard-shell {
+    -fx-background-color: #F4F8FC;
+    -fx-font-family: "System";
+}
+
+/* ---------- Header inside mainViewer ---------- */
+.dashboard-header {
+    -fx-background-color: transparent;
+}
+
+.dashboard-title {
+    -fx-text-fill: #0B2742;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.dashboard-subtitle {
+    -fx-text-fill: #4E7392;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+.dashboard-date {
+    -fx-text-fill: #244F73;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.dashboard-time {
+    -fx-text-fill: #5B7F9C;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+/* ---------- Metric cards ---------- */
+.metric-card {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF;
+    -fx-border-width: 1px;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 10px 12px 9px 12px;
+}
+
+.metric-card:hover {
+    -fx-border-color: #6C9EC3;
+    -fx-background-color: #FBFDFF;
+}
+
+.metric-main {
+    -fx-alignment: center-left;
+}
+
+.metric-name {
+    -fx-text-fill: #315C7C;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.metric-value {
+    -fx-text-fill: #0B2742;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.metric-status,
+.metric-caption {
+    -fx-text-fill: #6D879B;
+    -fx-font-size: 11px;
+    -fx-font-weight: normal;
+}
+
+.metric-percent {
+    -fx-text-fill: #416B8B;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.metric-progress-row {
+    -fx-spacing: 4px;
+}
+
+.progress-bar {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.progress-bar > .track {
+    -fx-background-color: #DCE8F2;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.progress-bar > .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.45em;
+}
+
+.progress-primary > .bar {
+    -fx-background-color: #1E5A86;
+}
+
+.progress-secondary > .bar {
+    -fx-background-color: #8CB4D2;
+}
+
+/* ---------- Lower panels ---------- */
+.dashboard-panel {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF;
+    -fx-border-width: 1px;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 12px;
+}
+
+.panel-title {
+    -fx-text-fill: #123B5D;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.panel-text,
+.occupancy-label {
+    -fx-text-fill: #55758D;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}
+
+.occupancy-value {
+    -fx-text-fill: #0F3858;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Pie chart */
+.occupancy-chart {
+    -fx-padding: 2px;
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: #1C5A87;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: #8FB8D5;
+}
+
+.default-color2.chart-pie {
+    -fx-pie-color: #C9DCEB;
+}
+
+.chart-pie-label {
+    -fx-fill: #355D7B;
+    -fx-font-size: 10px;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 4px;
+}
+
+/* Visitor status */
+.visitor-row {
+    -fx-background-color: #F7FAFD;
+    -fx-border-color: transparent transparent #E2ECF4 transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 7px 8px;
+}
+
+.visitor-count {
+    -fx-text-fill: #16527D;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.visitor-label {
+    -fx-text-fill: #496B84;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}
+
+/* ---------- Activity table ---------- */
+.activity-table {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5E3EF;
+    -fx-border-width: 1px;
+    -fx-table-cell-border-color: #E5EDF4;
+    -fx-padding: 0;
+}
+
+.activity-table .column-header-background {
+    -fx-background-color: #173F60;
+    -fx-background-insets: 0;
+}
+
+.activity-table .column-header,
+.activity-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent #315D7D transparent transparent;
+    -fx-border-width: 0 1px 0 0;
+    -fx-size: 34px;
+}
+
+.activity-table .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+
+.activity-table .table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #E9F0F6 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.activity-table .table-row-cell:odd {
+    -fx-background-color: #F8FBFD;
+}
+
+.activity-table .table-row-cell:selected {
+    -fx-background-color: #DCEAF5;
+}
+
+.activity-table .table-cell {
+    -fx-text-fill: #365A74;
+    -fx-font-size: 11px;
+    -fx-padding: 7px 8px;
+}
+
+.activity-table .placeholder .label {
+    -fx-text-fill: #7E98AB;
+}
+
+/* ---------- Scrollbars used by table ---------- */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #EDF3F8;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #7FA9C8;
+    -fx-background-radius: 0;
+}

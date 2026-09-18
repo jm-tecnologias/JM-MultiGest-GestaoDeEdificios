@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.NovoApartamentoController">
+    <children>
+        <VBox minHeight="0.0" minWidth="0.0" spacing="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" minWidth="0.0" prefHeight="62.0" styleClass="page-header">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" minWidth="0.0" spacing="2.0">
+                            <children>
+                                <Label styleClass="page-title" text="Novo Apartamento" />
+                                <Label styleClass="page-subtitle" text="Registe uma nova unidade no edifício" />
+                            </children>
+                        </VBox>
+                        <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
+                        <Label styleClass="form-context-badge" text="APARTAMENTOS" />
+                    </children>
+                </HBox>
+
+                <ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" minHeight="0.0" minWidth="0.0" pannable="false" styleClass="form-scroll" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox minWidth="0.0" spacing="14.0" styleClass="form-content">
+                            <children>
+                                <VBox minWidth="0.0" spacing="12.0" styleClass="form-card">
+                                    <children>
+                                        <VBox spacing="2.0">
+                                            <children>
+                                                <Label styleClass="form-section-title" text="Dados do apartamento" />
+                                                <Label styleClass="form-section-subtitle" text="Identificação e classificação da unidade" />
+                                            </children>
+                                        </VBox>
+
+                                        <GridPane hgap="16.0" minWidth="0.0" vgap="10.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
+                                            </columnConstraints>
+                                            <children>
+                                                <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <Label styleClass="field-label" text="Andar *" />
+                                                        <TextField fx:id="apartamentoAndarField" maxWidth="1.7976931348623157E308" promptText="Ex.: 3" styleClass="form-input" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <Label styleClass="field-label" text="Número *" />
+                                                        <TextField fx:id="apartamentoNumeroField" maxWidth="1.7976931348623157E308" promptText="Ex.: 3B" styleClass="form-input" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label styleClass="field-label" text="Tipo *" />
+                                                        <ComboBox fx:id="apartamentoTipoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccionar tipo" styleClass="form-input" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label styleClass="field-label" text="Estado *" />
+                                                        <ComboBox fx:id="apartamentoEstadoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccionar estado" styleClass="form-input" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                 <rowConstraints>
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                 </rowConstraints>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+
+                                <VBox minWidth="0.0" spacing="12.0" styleClass="form-card">
+                                    <children>
+                                        <VBox spacing="2.0">
+                                            <children>
+                                                <Label styleClass="form-section-title" text="Descrição" />
+                                                <Label styleClass="form-section-subtitle" text="Informação complementar sobre a unidade" />
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label styleClass="field-label" text="Descrição do apartamento" />
+                                                <TextArea fx:id="apartamentoDescricaoArea" maxWidth="1.7976931348623157E308" minHeight="115.0" prefHeight="140.0" promptText="Características, observações ou informação adicional..." styleClass="form-textarea" wrapText="true" VBox.vgrow="ALWAYS" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                            <padding>
+                                <Insets bottom="14.0" left="2.0" right="2.0" top="10.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <HBox alignment="CENTER_RIGHT" minWidth="0.0" spacing="10.0" styleClass="form-actions">
+                    <children>
+                        <Label styleClass="form-required-note" text="* Campos obrigatórios" />
+                        <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="cancelarApartamentoButton" minWidth="100.0" mnemonicParsing="false" onAction="#close" styleClass="secondary-button" text="Cancelar" />
+                        <Button fx:id="guardarApartamentoButton" minWidth="150.0" mnemonicParsing="false" styleClass="primary-button" text="Guardar Apartamento" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
