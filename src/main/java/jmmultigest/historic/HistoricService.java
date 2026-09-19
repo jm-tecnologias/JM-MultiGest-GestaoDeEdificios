@@ -13,8 +13,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
-import jmmultigest.client.MemberModel;
-import jmmultigest.client.MemberService;
 
 /**
  *
@@ -71,7 +69,7 @@ public class HistoricService {
                 HttpResponse.BodyHandlers.ofString());
 
         String jsonResponse = response.body();
-        System.out.println("Resposta: " + jsonResponse);
+//        System.out.println("Resposta: " + jsonResponse);
 
         if (response.statusCode() != 200 && response.statusCode() != 201) {
             throw new RuntimeException(
@@ -84,20 +82,20 @@ public class HistoricService {
         return objectMapper.readValue(jsonBody, HistoricModel.class);
     }
     
-    public static void main(String[] args) throws IOException, InterruptedException {
-        HistoricService service = new HistoricService();
-        HistoricModel x = new HistoricModel();
-        
-        try {
-            List<HistoricApartmentModel> k = service.listHistoricData();
-            for(HistoricApartmentModel b: k){
-                
-                System.out.println("_________________________");
-                System.out.println(b);
-            }
-        } catch (Exception e) {
-            System.err.println("Erro ao consumir API:");
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        HistoricService service = new HistoricService();
+//        HistoricModel x = new HistoricModel();
+//        
+//        try {
+//            List<HistoricApartmentModel> k = service.listHistoricData();
+//            for(HistoricApartmentModel b: k){
+//                
+//                System.out.println("_________________________");
+//                System.out.println(b);
+//            }
+//        } catch (Exception e) {
+//            System.err.println("Erro ao consumir API:");
+//            e.printStackTrace();
+//        }
+//    }
 }

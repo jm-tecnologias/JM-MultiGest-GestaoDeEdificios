@@ -51,7 +51,7 @@ public class MemberService {
                 HttpResponse.BodyHandlers.ofString());
 
         String jsonResponse = response.body();
-        System.out.println("Resposta: " + jsonResponse);
+//        System.out.println("Resposta: " + jsonResponse);
 
         if (response.statusCode() != 200 && response.statusCode() != 201) {
             throw new RuntimeException(
