@@ -152,7 +152,7 @@ public class ClientController implements Initializable{
         Thread thread = new Thread(() -> {
             try {
                 List<ClientModel> clientResult = clientService.getData();
-                List<HistoricApartmentModel> historicResult = historicoService.getData();
+                List<HistoricApartmentModel> historicResult = historicoService.listHistoricData();
                 Platform.runLater(() -> {
                     listaClientes.clear();
                     listaClientes.addAll(clientResult);

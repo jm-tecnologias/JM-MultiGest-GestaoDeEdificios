@@ -30,7 +30,7 @@ public class HistoricService {
         this.objectMapper = new ObjectMapper();
     }
     
-    public List<HistoricApartmentModel> getData() throws IOException, InterruptedException{
+    public List<HistoricApartmentModel> listHistoricData() throws IOException, InterruptedException{
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(API_URL + "/building/client/historic/list-all"))
@@ -87,12 +87,17 @@ public class HistoricService {
     public static void main(String[] args) throws IOException, InterruptedException {
         HistoricService service = new HistoricService();
         HistoricModel x = new HistoricModel();
-        x.setUser_id(1);
-        x.setClient_id(2);
-        x.setApartment_id(2);
-        x.setOccupational_date("2026-09-19");
-        x.setNum_member(1);
-        x.setDescription("Filha do membro principal, maior de idade com possivilidade de requerer uma conta de cliente");
-        service.create(x);
+        
+        try {
+            List<HistoricApartmentModel> k = service.listHistoricData();
+            for(HistoricApartmentModel b: k){
+                
+                System.out.println("_________________________");
+                System.out.println(b);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao consumir API:");
+            e.printStackTrace();
+        }
     }
 }

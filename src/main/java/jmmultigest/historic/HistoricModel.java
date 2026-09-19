@@ -12,7 +12,7 @@ public class HistoricModel {
     private int client_id;
     private int user_id;
     private int apartment_id;
-    private int num_member;
+    private int num_members;
     private String occupational_date;
     private String final_date;
     private String description;
@@ -22,11 +22,11 @@ public class HistoricModel {
     public HistoricModel() {
     }
 
-    public HistoricModel(int client_id, int user_id, int apartment_id, int num_member, String occupational_date, String final_date, String description) {
+    public HistoricModel(int client_id, int user_id, int apartment_id, int num_members, String occupational_date, String final_date, String description) {
         this.client_id = client_id;
         this.user_id = user_id;
         this.apartment_id = apartment_id;
-        this.num_member = num_member;
+        this.num_members = num_members;
         this.occupational_date = occupational_date;
         this.final_date = final_date;
         this.description = description;
@@ -56,12 +56,12 @@ public class HistoricModel {
         this.apartment_id = apartment_id;
     }
 
-    public int getNum_member() {
-        return num_member;
+    public int getNum_members() {
+        return num_members;
     }
 
-    public void setNum_member(int num_member) {
-        this.num_member = num_member;
+    public void setNum_members(int num_members) {
+        this.num_members = num_members;
     }
 
     public String getOccupational_date() {
