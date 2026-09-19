@@ -4,6 +4,7 @@
  */
 package jmmultigest.historic;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import jmmultigest.client.MemberModel;
+import jmmultigest.client.MemberService;
 
 /**
  *
@@ -42,5 +45,54 @@ public class HistoricService {
         return objectMapper.readValue(jsonResponse,
                 new TypeReference<List<HistoricApartmentModel>>(){});
         
+    }
+    
+    public HistoricModel create(HistoricModel model) throws JsonProcessingException, IOException, InterruptedException {
+        String jsonBody = objectMapper.writeValueAsString(model);
+        System.out.println("JSON Envioado: " + jsonBody);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL + "/building/client/historic/register"))
+                .header(
+                        "Content-Type",
+                        "application/json"
+                )
+                .header(
+                        "Accept",
+                        "application/json"
+                )
+                .POST(
+                        HttpRequest.BodyPublishers
+                                .ofString(jsonBody)
+                )
+                .build();
+        HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString());
+
+        String jsonResponse = response.body();
+        System.out.println("Resposta: " + jsonResponse);
+
+        if (response.statusCode() != 200 && response.statusCode() != 201) {
+            throw new RuntimeException(
+                    "HTTP ERRO: "
+                    + response.statusCode()
+                    + " - "
+                    + response.body()
+            );
+        }
+        return objectMapper.readValue(jsonBody, HistoricModel.class);
+    }
+    
+    public static void main(String[] args) throws IOException, InterruptedException {
+        HistoricService service = new HistoricService();
+        HistoricModel x = new HistoricModel();
+        x.setUser_id(1);
+        x.setClient_id(2);
+        x.setApartment_id(2);
+        x.setOccupational_date("2026-09-19");
+        x.setNum_member(1);
+        x.setDescription("Filha do membro principal, maior de idade com possivilidade de requerer uma conta de cliente");
+        service.create(x);
     }
 }
