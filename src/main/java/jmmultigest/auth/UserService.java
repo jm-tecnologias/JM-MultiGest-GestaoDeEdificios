@@ -44,7 +44,8 @@ public class UserService {
                         "application/json"
                 )
                 .POST(
-                        HttpRequest.BodyPublishers.ofString(jsonBody)
+                        HttpRequest.BodyPublishers
+                                .ofString(jsonBody)
                 )
                 .build();
         HttpResponse<String> response = httpClient.send(
