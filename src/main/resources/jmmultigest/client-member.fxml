@@ -94,11 +94,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TableView prefHeight="194.0" prefWidth="284.0">
+                        <TableView fx:id="tabelaMembro" prefHeight="194.0" prefWidth="284.0">
                           <columns>
-                              <TableColumn prefWidth="75.0" text="ID" />
-                            <TableColumn prefWidth="75.0" text="Doc. ID" />
-                            <TableColumn prefWidth="75.0" text="Nome" />
+                              <TableColumn fx:id="idColumnMembro" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="docIdColumnMembro" prefWidth="75.0" text="Doc. ID" />
+                            <TableColumn fx:id="nomeColumnMembro" prefWidth="75.0" text="Nome" />
+                              <TableColumn fx:id="apelidoColumnMembro" prefWidth="75.0" text="Apelido" />
                           </columns>
                         </TableView>
                      </children>

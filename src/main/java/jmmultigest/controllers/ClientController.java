@@ -27,6 +27,8 @@ import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.client.ClientModel;
 import jmmultigest.client.ClientService;
+import jmmultigest.client.MemberModel;
+import jmmultigest.client.MemberService;
 import jmmultigest.historic.HistoricApartmentModel;
 import jmmultigest.historic.HistoricService;
 import jmmultigest.utils.DataTransfer;
@@ -48,6 +50,14 @@ public class ClientController implements Initializable{
     @FXML private TableColumn<ClientModel, HBox> accoesColumnCliente;
     private ObservableList<ClientModel> listaClientes;
     private ClientService clientService;
+    
+    @FXML private TableView<MemberModel> tabelaMembro;
+    @FXML private TableColumn<MemberModel, Integer> idColumnMembro;
+    @FXML private TableColumn<MemberModel, String> docIdColumnMembro;
+    @FXML private TableColumn<MemberModel, String> nomeColumnMembro;
+    @FXML private TableColumn<MemberModel, String> apelidoColumnMembro;
+    private ObservableList<MemberModel> listaMembros;
+    private MemberService memberService;
     
     @FXML private TableView<HistoricApartmentModel> tabelaHistorico;
     @FXML private TableColumn<HistoricApartmentModel, String> apartamentoColumnHistorico;
@@ -73,8 +83,10 @@ public class ClientController implements Initializable{
             setTableWidth();
             clientService = new ClientService();
             historicoService = new HistoricService();
+            memberService = new MemberService(); 
             showClientes();
             showHistoric();
+            showMember();
             fetchData();
         } catch (IOException ex) {
             System.out.println("Erro (IOException) Inicializando servico Cliente: "+ex);
@@ -128,11 +140,23 @@ public class ClientController implements Initializable{
         saidaColumnHistorico.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHistoric().getFinal_date()));
     }
     
+    void showMember(){
+        listaMembros = FXCollections.observableArrayList();
+        tabelaMembro.setItems(listaMembros);
+        idColumnMembro.setCellValueFactory(new PropertyValueFactory<>("id"));
+        docIdColumnMembro.setCellValueFactory(new PropertyValueFactory<>("doc_id"));
+        nomeColumnMembro.setCellValueFactory(new PropertyValueFactory<>("name"));
+        apelidoColumnMembro.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        
+    }
+    
     @FXML
     void selecionaCliente(MouseEvent event){
         ClientModel x = tabelaCliente.getSelectionModel().getSelectedItem();
         if(x != null){
             textAreaDescricao.setText(x.getDescription());
+            listaMembros.clear();
+            listaMembros.addAll(x.getMembers());
         }
     }
     
@@ -151,11 +175,14 @@ public class ClientController implements Initializable{
     private void fetchData() {
         Thread thread = new Thread(() -> {
             try {
-                List<ClientModel> clientResult = clientService.getData();
+                List<ClientModel> clientResult = build.getClients();
+//                List<MemberModel> memberResult = build.getClients()
                 List<HistoricApartmentModel> historicResult = historicoService.listHistoricData();
                 Platform.runLater(() -> {
                     listaClientes.clear();
                     listaClientes.addAll(clientResult);
+                    
+                    
                     
                     listaHistorico.clear();
                     listaHistorico.addAll(historicResult);

@@ -5,6 +5,7 @@
 package jmmultigest.client;
 
 import java.util.List;
+import jmmultigest.historic.HistoricModel;
 
 /**
  *
@@ -19,6 +20,7 @@ public class ClientModel {
     private int building_id;
     private boolean status;
     private List<MemberModel> members;
+    private List<HistoricModel> historical;
     private String created_at;
     private String updated_at;
 
@@ -26,7 +28,8 @@ public class ClientModel {
     }
 
     public ClientModel(int user_id, String surname, int num_members, 
-            String description, int building_id, boolean status, List<MemberModel> members) {
+            String description, int building_id, boolean status,
+            List<MemberModel> members, List<HistoricModel> historical) {
         this.user_id = user_id;
         this.surname = surname;
         this.num_members = num_members;
@@ -34,6 +37,7 @@ public class ClientModel {
         this.building_id = building_id;
         this.status = status;
         this.members = members;
+        this.historical = historical;
     }
 
     public int getId() {
@@ -94,6 +98,14 @@ public class ClientModel {
 
     public List<MemberModel> getMembers() {
         return members;
+    }
+
+    public List<HistoricModel> getHistorical() {
+        return historical;
+    }
+
+    public void setHistorical(List<HistoricModel> historical) {
+        this.historical = historical;
     }
 
     public void setMembers(List<MemberModel> members) {
