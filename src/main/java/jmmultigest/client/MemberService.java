@@ -29,7 +29,7 @@ public class MemberService {
     
     public MemberModel create(MemberModel member) throws JsonProcessingException, IOException, InterruptedException {
         String jsonBody = objectMapper.writeValueAsString(member);
-        System.out.println("JSON Envioado: " + jsonBody);
+//        System.out.println("JSON Envioado: " + jsonBody);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL + "/building/clients/members/register"))
@@ -61,21 +61,21 @@ public class MemberService {
                     + response.body()
             );
         }
-        return objectMapper.readValue(jsonBody, MemberModel.class);
+        return objectMapper.readValue(jsonResponse, MemberModel.class);
     }
     
-    public static void main(String[] args) throws IOException, InterruptedException {
-        MemberService service = new MemberService();
-        MemberModel client = new MemberModel();
-        client.setUser_id(1);
-        client.setClient_id(2);
-        client.setDoc_id("100110682835M");
-        client.setApartment_id(2);
-        client.setSurname("Cossa");
-        client.setName("Rosa");
-        client.setPhone("848484849");
-        client.setEmail("rosa.mamuel@mail.com");
-        client.setDescription("Filha do membro principal, maior de idade com possivilidade de requerer uma conta de cliente");
-        service.create(client);
-    }
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        MemberService service = new MemberService();
+//        MemberModel client = new MemberModel();
+//        client.setUser_id(1);
+//        client.setClient_id(2);
+//        client.setDoc_id("100110682835M");
+//        client.setApartment_id(2);
+//        client.setSurname("Cossa");
+//        client.setName("Rosa");
+//        client.setPhone("848484849");
+//        client.setEmail("rosa.mamuel@mail.com");
+//        client.setDescription("Filha do membro principal, maior de idade com possivilidade de requerer uma conta de cliente");
+//        service.create(client);
+//    }
 }

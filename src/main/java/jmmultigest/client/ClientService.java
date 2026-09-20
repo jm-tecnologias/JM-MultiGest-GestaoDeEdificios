@@ -51,7 +51,7 @@ public class ClientService {
 
     public ClientModel create(ClientModel client) throws JsonProcessingException, IOException, InterruptedException {
         String jsonBody = objectMapper.writeValueAsString(client);
-        System.out.println("JSON Envioado: " + jsonBody);
+//        System.out.println("JSON Envioado: " + jsonBody);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL + "/building/clients/register"))
@@ -83,17 +83,21 @@ public class ClientService {
                     + response.body()
             );
         }
-        return objectMapper.readValue(jsonBody, ClientModel.class);
+        return objectMapper.readValue(jsonResponse, ClientModel.class);
     }
     
-    public static void main(String[] args) throws IOException, InterruptedException {
-        ClientService service = new ClientService();
-        ClientModel client = new ClientModel();
-        client.setUser_id(1);
-        client.setSurname("Cossa, Manuel");
-        client.setNum_members(5);
-        client.setDescription("Membro Principal");
-        client.setBuilding_id(1);
-        service.create(client);
-    }
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        ClientService service = new ClientService();
+//        ClientModel client = new ClientModel();
+//        client.setUser_id(1);
+//        client.setSurname("dff, Mael");
+//        client.setNum_members(5);
+//        client.setDescription("Membro Principal");
+//        client.setBuilding_id(1);
+//        ClientModel xx = service.create(client);
+//        System.out.println("TESTE: "+xx.getId());
+//        System.out.println("TESTE: "+xx.getSurname());
+//        System.out.println("TESTE: "+xx.getBuilding_id());
+//        System.out.println("TESTE: "+xx.getCreated_at());
+//    }
 }

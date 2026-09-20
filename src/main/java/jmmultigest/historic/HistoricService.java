@@ -47,7 +47,7 @@ public class HistoricService {
     
     public HistoricModel create(HistoricModel model) throws JsonProcessingException, IOException, InterruptedException {
         String jsonBody = objectMapper.writeValueAsString(model);
-        System.out.println("JSON Envioado: " + jsonBody);
+//        System.out.println("JSON Envioado: " + jsonBody);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL + "/building/client/historic/register"))
@@ -79,7 +79,7 @@ public class HistoricService {
                     + response.body()
             );
         }
-        return objectMapper.readValue(jsonBody, HistoricModel.class);
+        return objectMapper.readValue(jsonResponse, HistoricModel.class);
     }
     
 //    public static void main(String[] args) throws IOException, InterruptedException {

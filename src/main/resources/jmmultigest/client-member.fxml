@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.ClientController">
+<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.ClientController">
    <children>
-      <VBox minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="790.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <VBox minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="790.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <HBox alignment="CENTER" minWidth="0.0" prefHeight="59.0" prefWidth="800.0" styleClass="page-header">
                <children>
@@ -48,20 +48,9 @@
                   </Button>
                </children>
             </HBox>
-            <Region minHeight="8.0" prefHeight="29.0" prefWidth="800.0" />
             <HBox alignment="BOTTOM_CENTER" minWidth="0.0" prefHeight="30.0" prefWidth="800.0" spacing="30.0" styleClass="filter-row">
                <children>
                   <TextField minWidth="120.0" prefHeight="25.0" prefWidth="375.0" styleClass="filter-field" HBox.hgrow="ALWAYS" />
-                  <VBox alignment="TOP_RIGHT">
-                     <children>
-                        <Label text="Descrição Cliente / Historico">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <TextArea fx:id="textAreaDescricao" editable="false" prefHeight="70.0" prefWidth="403.0" wrapText="true" />
-                     </children>
-                  </VBox>
                </children>
                <VBox.margin>
                   <Insets />
@@ -72,7 +61,7 @@
             </HBox>
          </children>
       </VBox>
-      <SplitPane dividerPositions="0.6353383458646616" layoutX="108.0" layoutY="140.0" prefHeight="226.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <SplitPane dividerPositions="0.6353383458646616" layoutX="108.0" layoutY="100.0" prefHeight="226.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -98,18 +87,18 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <VBox layoutX="14.0" layoutY="1.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Membros/Agregado">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tabelaHistorico" onMouseClicked="#selecionaHistorico" prefHeight="200.0" prefWidth="200.0">
+                        <TableView prefHeight="194.0" prefWidth="284.0">
                           <columns>
-                            <TableColumn fx:id="apartamentoColumnHistorico" prefWidth="121.0" text="Apartamento" />
-                            <TableColumn fx:id="entradaColumnHistorico" prefWidth="66.0" text="Entrada" />
-                              <TableColumn fx:id="saidaColumnHistorico" prefWidth="63.0" text="Saida" />
+                              <TableColumn prefWidth="75.0" text="ID" />
+                            <TableColumn prefWidth="75.0" text="Doc. ID" />
+                            <TableColumn prefWidth="75.0" text="Nome" />
                           </columns>
                         </TableView>
                      </children>
@@ -118,57 +107,101 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Label layoutX="49.0" layoutY="372.0" text="Detalhes do Apartamento">
+      <Label layoutX="39.0" layoutY="430.0" text="Detalhes do Apartamento">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="410.0" text="Piso / Bloco:">
+      <Label layoutX="10.0" layoutY="463.0" text="Piso / Bloco:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="pisoBlocoLabel" layoutX="170.0" layoutY="410.0" prefHeight="20.0" prefWidth="168.0" text="Label">
+      <Label fx:id="pisoBlocoLabel" layoutX="150.0" layoutY="463.0" prefHeight="20.0" prefWidth="155.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="350.0" layoutY="410.0" text="Numero:">
+      <Label layoutX="320.0" layoutY="463.0" text="Numero:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="numeroLabel" layoutX="430.0" layoutY="410.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+      <Label fx:id="numeroLabel" layoutX="400.0" layoutY="463.0" prefHeight="20.0" prefWidth="95.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="441.0" text="Tipo de apartamento:">
+      <Label layoutX="10.0" layoutY="494.0" text="Tipo de apartamento:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="tipoApartamentoLabel" layoutX="170.0" layoutY="441.0" prefHeight="20.0" prefWidth="168.0" text="Label">
+      <Label fx:id="tipoApartamentoLabel" layoutX="150.0" layoutY="494.0" prefHeight="20.0" prefWidth="155.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="350.0" layoutY="441.0" text="Estado:">
+      <Label layoutX="320.0" layoutY="494.0" text="Estado:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="estadoLabel" layoutX="430.0" layoutY="441.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+      <Label fx:id="estadoLabel" layoutX="400.0" layoutY="494.0" prefHeight="20.0" prefWidth="95.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="descricaoLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="471.0" prefHeight="59.0" prefWidth="251.0" text="Descrição" wrapText="true" />
-      <TableView layoutX="505.0" layoutY="375.0" prefHeight="159.0" prefWidth="291.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Historico" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <Label fx:id="descricaoLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="518.0" prefHeight="45.0" prefWidth="484.0" text="Descrição" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <VBox alignment="TOP_RIGHT" layoutX="377.0" layoutY="327.0" prefHeight="238.0" prefWidth="297.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <Label text="Descrição Cliente / Historico">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="textAreaDescricao" editable="false" prefHeight="70.0" prefWidth="403.0" wrapText="true" />
+            <Label text="Historico">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tabelaHistorico" onMouseClicked="#selecionaHistorico" prefHeight="135.0" prefWidth="269.0">
+              <columns>
+                <TableColumn fx:id="apartamentoColumnHistorico" prefWidth="121.0" text="Apartamento" />
+                <TableColumn fx:id="entradaColumnHistorico" prefWidth="66.0" text="Entrada" />
+                  <TableColumn fx:id="saidaColumnHistorico" prefWidth="63.0" text="Saida" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <Label layoutX="10.0" layoutY="337.0" text="Telefone">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="pisoBlocoLabel1" alignment="TOP_LEFT" layoutX="10.0" layoutY="359.0" prefHeight="20.0" prefWidth="187.0" text="+258 8X 000 0000">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="380.0" text="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="401.0" prefHeight="20.0" prefWidth="484.0" text="exemplo@mail.com">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="209.0" layoutY="337.0" prefHeight="66.0" prefWidth="282.0" text="Descrição">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

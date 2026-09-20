@@ -4,6 +4,7 @@
  */
 package jmmultigest.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -104,9 +105,9 @@ public class NovoCliententroller implements Initializable{
     }
     
     @FXML
-    void save(ActionEvent e){
+    void save(ActionEvent e) throws IOException, JsonProcessingException, InterruptedException{
         MemberModel member = saveMember();
-        HistoricModel historic = null;
+        HistoricModel historic;
         try {
             historic = new HistoricModel();
             historic.setClient_id(member.getClient_id());
@@ -134,6 +135,7 @@ public class NovoCliententroller implements Initializable{
             client.setUser_id(user.getUser().getId());
             client.setSurname(apelidoField.getText()+", "+nomeField.getText());
             client.setDescription(clientObservacoesArea.getText());
+            client.setNum_members(Integer.parseInt(agregadoField.getText()));
             client.setBuilding_id(build.getId());
             model = clientService.create(client);
         } catch (IOException ex) {
@@ -144,7 +146,7 @@ public class NovoCliententroller implements Initializable{
         return model;
     }
     
-    MemberModel saveMember(){
+    MemberModel saveMember() throws IOException, JsonProcessingException, InterruptedException{
         ClientModel client = saveClient();
         ApartmentModel ap = apartamentMap.get(apartamentoCombo.getValue());
         MemberModel member;
