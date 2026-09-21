@@ -96,7 +96,7 @@ public class NovoMembroController implements Initializable{
             model.setDescription(membroObservacoesArea.getText());
             memberService.create(model);
         } catch (ApiException ex) {
-            ErroUtil.showError("Não foi possível registar o Membro",ex.getMessage());
+            ErroUtil.showError("Erro ao registar o Membro",ex.getMessage());
         } catch (NumberFormatException ex) {
             ErroUtil.showError(
                 "Dados inválidos",

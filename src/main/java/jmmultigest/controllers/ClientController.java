@@ -69,6 +69,7 @@ public class ClientController implements Initializable{
     private HistoricService historicoService;
     
     @FXML private TextArea descricaoHistoricotextArea;
+    @FXML private TextArea descricaoMemberTextArea;
     @FXML private Label pisoBlocoLabel;
     @FXML private Label numeroLabel;
     @FXML private Label descricaoApartamentoLabel;
@@ -76,7 +77,6 @@ public class ClientController implements Initializable{
     @FXML private Label estadoLabel;
     @FXML private Label telefoneLabel;
     @FXML private Label emailLabel;
-    @FXML private Label descricaoMemberLabel;
     
 
     @Override
@@ -216,7 +216,7 @@ public class ClientController implements Initializable{
             */
             telefoneLabel.setText("...");
             emailLabel.setText("...");
-            descricaoMemberLabel.setText("...");
+            descricaoMemberTextArea.setText("...");
             
         }
     }
@@ -239,27 +239,20 @@ public class ClientController implements Initializable{
         if(x != null){
             telefoneLabel.setText(x.getPhone());
             emailLabel.setText(x.getEmail());
-            descricaoMemberLabel.setText(x.getDescription());
+            descricaoMemberTextArea.setText(x.getDescription());
         }else{
             telefoneLabel.setText("...");
             emailLabel.setText("...");
-            descricaoMemberLabel.setText("...");
+            descricaoMemberTextArea.setText("...");
         }
     }
     private void fetchData() {
         Thread thread = new Thread(() -> {
             try {
                 List<ClientModel> clientResult = build.getClients();
-//                List<MemberModel> memberResult = build.getClients()
-//                List<HistoricApartmentModel> historicResult = historicoService.listHistoricData();
                 Platform.runLater(() -> {
                     listaClientes.clear();
                     listaClientes.addAll(clientResult);
-                    
-                    
-//                    
-//                    listaHistorico.clear();
-//                    listaHistorico.addAll(historicResult);
                 });
             } catch (Exception e) {
                 e.printStackTrace();

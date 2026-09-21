@@ -34,6 +34,7 @@ import jmmultigest.historic.HistoricModel;
 import jmmultigest.historic.HistoricService;
 import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
+import jmmultigest.utils.ErroUtil;
 import jmmultigest.utils.LoadAndMoveUtilities;
 
 /**
@@ -137,10 +138,22 @@ public class NovoCliententroller implements Initializable{
             client.setNum_members(Integer.parseInt(agregadoField.getText()));
             client.setBuilding_id(build.getId());
             model = clientService.create(client);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao registar o Cliente",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "O número de membros deve ser um valor numérico.");
         } catch (IOException ex) {
-            System.out.println("Erro (IOException) ao registar cliente: "+ex);
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
         } catch (InterruptedException ex) {
-            System.out.println("Erro (InterruptedException) ao registar cliente: "+ex);
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
         }
         return model;
     }
@@ -163,12 +176,17 @@ public class NovoCliententroller implements Initializable{
             member.setDescription(clientObservacoesArea.getText()+"(Primeiro membro)");
             model = memberService.create(member);
         } catch (ApiException ex) {
-            System.out.println("Não foi possível registar o Membro: " + ex.getMessage());
-        
+            ErroUtil.showError("Erro ao registar o Cliente(Fase 2 - Membro)",ex.getMessage());
         } catch (IOException ex) {
-            System.out.println("Erro (IOException) ao registar membro: "+ex);
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
         } catch (InterruptedException ex) {
-            System.out.println("Erro (InterruptedException) ao registar membro: "+ex);
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
         }
         return model;
     }

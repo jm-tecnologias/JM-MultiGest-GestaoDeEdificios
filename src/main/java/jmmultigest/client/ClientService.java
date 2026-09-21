@@ -6,6 +6,7 @@ package jmmultigest.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
@@ -13,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import jmmultigest.utils.ApiException;
 
 /**
  *
@@ -30,7 +32,7 @@ public class ClientService {
         this.objectMapper = new ObjectMapper();
     }
 
-    public List<ClientModel> getData() throws IOException, InterruptedException {
+    public List<ClientModel> getData() throws IOException, InterruptedException, ApiException {
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(API_URL + "/building/clients/list-all"))
@@ -42,6 +44,22 @@ public class ClientService {
         );
         String jsonResponse = response.body();
 //        System.out.println("Resposta: "+jsonResponse);
+        if (response.statusCode() != 200 && response.statusCode() != 201) {
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
+            );
+        }
 
         return objectMapper.readValue(jsonResponse,
                 new TypeReference<List<ClientModel>>() {
@@ -49,7 +67,7 @@ public class ClientService {
 
     }
 
-    public ClientModel create(ClientModel client) throws JsonProcessingException, IOException, InterruptedException {
+    public ClientModel create(ClientModel client) throws JsonProcessingException, IOException, InterruptedException, ApiException {
         String jsonBody = objectMapper.writeValueAsString(client);
 //        System.out.println("JSON Envioado: " + jsonBody);
 
@@ -76,16 +94,24 @@ public class ClientService {
 //        System.out.println("Resposta: " + jsonResponse);
 
         if (response.statusCode() != 200 && response.statusCode() != 201) {
-            throw new RuntimeException(
-                    "HTTP ERRO: "
-                    + response.statusCode()
-                    + " - "
-                    + response.body()
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
             );
         }
         return objectMapper.readValue(jsonResponse, ClientModel.class);
     }
-    
+
 //    public static void main(String[] args) throws IOException, InterruptedException {
 //        ClientService service = new ClientService();
 //        ClientModel client = new ClientModel();

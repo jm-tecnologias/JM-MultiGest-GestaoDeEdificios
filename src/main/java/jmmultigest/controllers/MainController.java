@@ -16,13 +16,16 @@ import javafx.scene.layout.AnchorPane;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.building.BuildingService;
+import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
+import jmmultigest.utils.ErroUtil;
 
 /**
  *
  * @author JM-Tecnologias
  */
 public class MainController implements Initializable {
+
     private BuildingService buildService;
     private UserEmployeeModel user;
     private BuildModel build;
@@ -40,11 +43,30 @@ public class MainController implements Initializable {
     @FXML
     private Button btn_apartamento;
 
+    
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        user = DataTransfer.getUserData();
+        try {
+            buildService = new BuildingService();
+        } catch (IOException ex) {
+            ErroUtil.showError("Erro de comunicação",
+                    "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError("Operação interrompida",
+                    "A comunicação com o servidor foi interrompida.");
+        }
+    }
+    
+    
     @FXML
     public void switchForm(ActionEvent event) throws IOException {
+        loadBuildData();
         String path = "";
         if (event.getSource() == btn_dashboard) {
-
             path = "/jmmultigest/dashboard.fxml";
         } else if (event.getSource() == btn_seguranca) {
             path = "/jmmultigest/portaria-seguranca.fxml";
@@ -57,19 +79,23 @@ public class MainController implements Initializable {
         }
         AnchorPane pane = FXMLLoader.load(getClass().getResource(path));
         mainViewer.getChildren().setAll(pane);
+
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        user = DataTransfer.getUserData();
+    void loadBuildData() {
         try {
-            buildService = new BuildingService();
             build = buildService.getBuildingData(user.getEmployee().getBuilding_id());
             DataTransfer.setBuildingData(build);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao carregar dados do edificio", ex.getMessage());
         } catch (IOException ex) {
-            System.out.println("Erro (IOException) ao inicializar servico Building no dashboar "+ex);
+            ErroUtil.showError("Erro de comunicação",
+                    "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
         } catch (InterruptedException ex) {
-            System.out.println("Erro (InterruptedException) ao inicializar servico Building no dashboar "+ex);
+            Thread.currentThread().interrupt();
+            ErroUtil.showError("Operação interrompida",
+                    "A comunicação com o servidor foi interrompida.");
         }
     }
 

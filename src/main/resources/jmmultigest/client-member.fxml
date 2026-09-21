@@ -172,7 +172,7 @@
                   <TableColumn fx:id="saidaColumnHistorico" prefWidth="63.0" text="Saida" />
               </columns>
             </TableView>
-            <Label text="Descrição Cliente / Historico">
+            <Label text="Descrição Cliente">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -200,10 +200,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="descricaoMemberLabel" alignment="TOP_LEFT" layoutX="7.0" layoutY="364.0" prefHeight="66.0" prefWidth="478.0" text="Descrição" wrapText="true">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <TextArea fx:id="descricaoMemberTextArea" editable="false" layoutX="10.0" layoutY="364.0" prefHeight="66.0" prefWidth="484.0" wrapText="true" />
    </children>
 </AnchorPane>
