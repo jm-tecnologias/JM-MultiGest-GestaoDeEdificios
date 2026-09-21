@@ -41,7 +41,7 @@
                      </font>
                   </Button>
                   <Region prefHeight="53.0" prefWidth="20.0" />
-                  <Button mnemonicParsing="false" styleClass="primary-button" text="Novo Membro">
+                  <Button mnemonicParsing="false" onAction="#openNovoMembro" styleClass="primary-button" text="Novo Membro">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -74,11 +74,12 @@
                         </Label>
                         <TableView fx:id="tabelaCliente" onMouseClicked="#selecionaCliente" styleClass="management-table">
                            <columns>
-                              <TableColumn fx:id="idColumnCliente" prefWidth="47.0" text="ID" />
-                              <TableColumn fx:id="nomeColumnCliente" prefWidth="172.0" text="Cliente" />
-                              <TableColumn fx:id="membrosColumnCliente" prefWidth="95.0" text="Membros" />
-                              <TableColumn fx:id="estadoColumnCliente" prefWidth="108.0" text="Estado" />
-                              <TableColumn fx:id="accoesColumnCliente" prefWidth="116.0" text="Ação" />
+                              <TableColumn fx:id="idColumnCliente" prefWidth="30.0" text="ID" />
+                              <TableColumn fx:id="nomeColumnCliente" prefWidth="154.0" text="Cliente" />
+                              <TableColumn fx:id="membrosColumnCliente" prefWidth="84.0" text="Membros" />
+                              <TableColumn fx:id="estadoColumnCliente" prefWidth="93.0" text="Estado" />
+                              <TableColumn fx:id="descricaoColumnCliente" prefWidth="57.0" text="Descrição" />
+                              <TableColumn fx:id="accoesColumnCliente" prefWidth="79.0" text="Ação" />
                            </columns>
                         </TableView>
                      </children>
@@ -94,7 +95,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tabelaMembro" prefHeight="194.0" prefWidth="284.0">
+                        <TableView fx:id="tabelaMembro" onMouseClicked="#selecionamembro" prefHeight="194.0" prefWidth="284.0">
                           <columns>
                               <TableColumn fx:id="idColumnMembro" prefWidth="75.0" text="ID" />
                             <TableColumn fx:id="docIdColumnMembro" prefWidth="75.0" text="Doc. ID" />
@@ -118,7 +119,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="pisoBlocoLabel" layoutX="150.0" layoutY="463.0" prefHeight="20.0" prefWidth="155.0" text="Label">
+      <Label fx:id="pisoBlocoLabel" layoutX="150.0" layoutY="463.0" prefHeight="20.0" prefWidth="155.0" text=". . .">
          <font>
             <Font size="14.0" />
          </font>
@@ -128,7 +129,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="numeroLabel" layoutX="400.0" layoutY="463.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+      <Label fx:id="numeroLabel" layoutX="400.0" layoutY="463.0" prefHeight="20.0" prefWidth="95.0" text=". . .">
          <font>
             <Font size="14.0" />
          </font>
@@ -138,7 +139,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="tipoApartamentoLabel" layoutX="150.0" layoutY="494.0" prefHeight="20.0" prefWidth="155.0" text="Label">
+      <Label fx:id="tipoApartamentoLabel" layoutX="150.0" layoutY="494.0" prefHeight="20.0" prefWidth="155.0" text=". . .">
          <font>
             <Font size="14.0" />
          </font>
@@ -148,23 +149,17 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="estadoLabel" layoutX="400.0" layoutY="494.0" prefHeight="20.0" prefWidth="95.0" text="Label">
+      <Label fx:id="estadoLabel" layoutX="400.0" layoutY="494.0" prefHeight="20.0" prefWidth="95.0" text=". . .">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="descricaoLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="518.0" prefHeight="45.0" prefWidth="484.0" text="Descrição" wrapText="true">
+      <Label fx:id="descricaoApartamentoLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="518.0" prefHeight="45.0" prefWidth="484.0" text="Descrição" wrapText="true">
          <font>
             <Font size="14.0" />
          </font></Label>
       <VBox alignment="TOP_RIGHT" layoutX="377.0" layoutY="327.0" prefHeight="238.0" prefWidth="297.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label text="Descrição Cliente / Historico">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="textAreaDescricao" editable="false" prefHeight="70.0" prefWidth="403.0" wrapText="true" />
             <Label text="Historico">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -177,6 +172,12 @@
                   <TableColumn fx:id="saidaColumnHistorico" prefWidth="63.0" text="Saida" />
               </columns>
             </TableView>
+            <Label text="Descrição Cliente / Historico">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="descricaoHistoricotextArea" editable="false" prefHeight="70.0" prefWidth="403.0" wrapText="true" />
          </children>
       </VBox>
       <Label layoutX="10.0" layoutY="337.0" text="Telefone">
@@ -184,22 +185,22 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="pisoBlocoLabel1" alignment="TOP_LEFT" layoutX="10.0" layoutY="359.0" prefHeight="20.0" prefWidth="187.0" text="+258 8X 000 0000">
+      <Label fx:id="telefoneLabel" alignment="TOP_LEFT" layoutX="75.0" layoutY="337.0" prefHeight="20.0" prefWidth="135.0" text=". . .">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="380.0" text="Email">
+      <Label layoutX="223.0" layoutY="337.0" text="Email">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="401.0" prefHeight="20.0" prefWidth="484.0" text="exemplo@mail.com">
+      <Label fx:id="emailLabel" layoutX="272.0" layoutY="337.0" prefHeight="20.0" prefWidth="226.0" text=". . .">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="209.0" layoutY="337.0" prefHeight="66.0" prefWidth="282.0" text="Descrição">
+      <Label fx:id="descricaoMemberLabel" alignment="TOP_LEFT" layoutX="7.0" layoutY="364.0" prefHeight="66.0" prefWidth="478.0" text="Descrição" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>

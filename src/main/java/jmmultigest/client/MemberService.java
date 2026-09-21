@@ -5,18 +5,21 @@
 package jmmultigest.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import jmmultigest.utils.ApiException;
 
 /**
  *
  * @author JM-Tecnologias
  */
 public class MemberService {
+
     private static final String API_URL = "http://127.0.0.1:8000";
     private final HttpClient httpClient;
     ;
@@ -26,8 +29,9 @@ public class MemberService {
         this.httpClient = HttpClient.newHttpClient();
         this.objectMapper = new ObjectMapper();
     }
-    
-    public MemberModel create(MemberModel member) throws JsonProcessingException, IOException, InterruptedException {
+
+    public MemberModel create(MemberModel member) throws JsonProcessingException,
+            IOException, InterruptedException, ApiException {
         String jsonBody = objectMapper.writeValueAsString(member);
 //        System.out.println("JSON Envioado: " + jsonBody);
 
@@ -53,18 +57,34 @@ public class MemberService {
         String jsonResponse = response.body();
 //        System.out.println("Resposta: " + jsonResponse);
 
+//        if (response.statusCode() != 200 && response.statusCode() != 201) {
+//            throw new RuntimeException(
+//                    "HTTP ERRO: "
+//                    + response.statusCode()
+//                    + " - "
+//                    + response.body()
+//            );
+//        }
         if (response.statusCode() != 200 && response.statusCode() != 201) {
-            throw new RuntimeException(
-                    "HTTP ERRO: "
-                    + response.statusCode()
-                    + " - "
-                    + response.body()
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
             );
         }
         return objectMapper.readValue(jsonResponse, MemberModel.class);
     }
-    
-//    public static void main(String[] args) throws IOException, InterruptedException {
+
+//    public static void main(String[] args) throws IOException, InterruptedException, ApiException {
 //        MemberService service = new MemberService();
 //        MemberModel client = new MemberModel();
 //        client.setUser_id(1);
@@ -74,6 +94,7 @@ public class MemberService {
 //        client.setSurname("Cossa");
 //        client.setName("Rosa");
 //        client.setPhone("848484849");
+//        client.setClient_relationship("Filho");
 //        client.setEmail("rosa.mamuel@mail.com");
 //        client.setDescription("Filha do membro principal, maior de idade com possivilidade de requerer uma conta de cliente");
 //        service.create(client);

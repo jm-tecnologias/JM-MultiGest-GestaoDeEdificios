@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.NovoMembroController">
     <children>
         <VBox minHeight="0.0" minWidth="0.0" spacing="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <children>
@@ -44,43 +44,49 @@
                                                 <Label styleClass="form-section-subtitle" text="Informação pessoal e contacto" />
                                             </children>
                                         </VBox>
-
-                                        <GridPane hgap="16.0" minWidth="0.0" vgap="10.0">
-                                            <columnConstraints>
-                                                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
-                                                <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
-                                            </columnConstraints>
-                                            <children>
-                                                <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                                    <children>
-                                                        <Label styleClass="field-label" text="Nome completo *" />
-                                                        <TextField fx:id="membroNomeField" maxWidth="1.7976931348623157E308" promptText="Nome do membro" styleClass="form-input" />
-                                                    </children>
-                                                </VBox>
-                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                                    <children>
-                                                        <Label styleClass="field-label" text="Apelido *" />
-                                                        <TextField fx:id="membroApelidoField" maxWidth="1.7976931348623157E308" promptText="Apelido" styleClass="form-input" />
-                                                    </children>
-                                                </VBox>
-                                                <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                                                    <children>
-                                                        <Label styleClass="field-label" text="Telefone" />
-                                                        <TextField fx:id="membroTelefoneField" maxWidth="1.7976931348623157E308" promptText="Ex.: 84 000 0000" styleClass="form-input" />
-                                                    </children>
-                                                </VBox>
-                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                    <children>
-                                                        <Label styleClass="field-label" text="E-mail" />
-                                                        <TextField fx:id="membroEmailField" maxWidth="1.7976931348623157E308" promptText="email@exemplo.com" styleClass="form-input" />
-                                                    </children>
-                                                </VBox>
-                                            </children>
+                              <GridPane hgap="16.0" minWidth="0.0" vgap="10.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
+                                 </columnConstraints>
+                                 <children>
+                                    <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                       <children>
+                                          <Label styleClass="field-label" text="Nome *" />
+                                          <TextField fx:id="nomeField" maxWidth="1.7976931348623157E308" promptText="Carlos" styleClass="form-input" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                       <children>
+                                          <Label styleClass="field-label" text="Apelido *" />
+                                          <TextField fx:id="apelidoField" maxWidth="1.7976931348623157E308" promptText="Mula" styleClass="form-input" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label styleClass="field-label" text="Telefone *" />
+                                          <TextField fx:id="telefoneField" maxWidth="1.7976931348623157E308" promptText="Ex.: 84 000 0000" styleClass="form-input" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label styleClass="field-label" text="E-mail" />
+                                          <TextField fx:id="emailField" maxWidth="1.7976931348623157E308" promptText="email@exemplo.com" styleClass="form-input" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0" GridPane.rowIndex="2">
+                                       <children>
+                                          <Label styleClass="field-label" text="Doc. ID *" />
+                                          <TextField fx:id="docIDField" maxWidth="1.7976931348623157E308" promptText="Ex.: 110100692835M" styleClass="form-input" />
+                                       </children>
+                                    </VBox>
+                                 </children>
                                  <rowConstraints>
                                     <RowConstraints />
                                     <RowConstraints />
+                                    <RowConstraints />
                                  </rowConstraints>
-                                        </GridPane>
+                              </GridPane>
                                     </children>
                                 </VBox>
 
@@ -97,33 +103,16 @@
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
                                                 <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
+                                    <ColumnConstraints />
                                             </columnConstraints>
                                             <children>
-                                                <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                                    <children>
-                                                        <Label styleClass="field-label" text="Cliente responsável *" />
-                                                        <ComboBox fx:id="membroClienteCombo" maxWidth="1.7976931348623157E308" promptText="Seleccionar cliente" styleClass="form-input" />
-                                                    </children>
-                                                </VBox>
-                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                                    <children>
-                                                        <Label styleClass="field-label" text="Apartamento *" />
-                                                        <ComboBox fx:id="membroApartamentoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccionar apartamento" styleClass="form-input" />
-                                                    </children>
-                                                </VBox>
                                                 <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                                     <children>
                                                         <Label styleClass="field-label" text="Relação com o cliente" />
                                                         <ComboBox fx:id="membroRelacaoCombo" maxWidth="1.7976931348623157E308" promptText="Ex.: Familiar" styleClass="form-input" />
                                                     </children>
                                                 </VBox>
-                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                    <children>
-                                                        <Label styleClass="field-label" text="Estado *" />
-                                                        <ComboBox fx:id="membroEstadoCombo" maxWidth="1.7976931348623157E308" promptText="Seleccionar estado" styleClass="form-input" />
-                                                    </children>
-                                                </VBox>
-                                                <VBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                     <children>
                                                         <Label styleClass="field-label" text="Observações" />
                                                         <TextArea fx:id="membroObservacoesArea" maxWidth="1.7976931348623157E308" minHeight="76.0" prefHeight="88.0" promptText="Notas adicionais sobre o membro..." styleClass="form-textarea" wrapText="true" />
@@ -150,8 +139,8 @@
                     <children>
                         <Label styleClass="form-required-note" text="* Campos obrigatórios" />
                         <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="cancelarMembroButton" minWidth="100.0" mnemonicParsing="false" styleClass="secondary-button" text="Cancelar" />
-                        <Button fx:id="guardarMembroButton" minWidth="130.0" mnemonicParsing="false" styleClass="primary-button" text="Guardar Membro" />
+                        <Button fx:id="cancelarMembroButton" minWidth="100.0" mnemonicParsing="false" onAction="#close" styleClass="secondary-button" text="Cancelar" />
+                        <Button fx:id="guardarMembroButton" minWidth="130.0" mnemonicParsing="false" onAction="#saveMember" styleClass="primary-button" text="Guardar Membro" />
                     </children>
                 </HBox>
             </children>

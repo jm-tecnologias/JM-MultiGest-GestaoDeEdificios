@@ -6,6 +6,7 @@ package jmmultigest.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -45,6 +46,7 @@ public class ClientController implements Initializable{
     @FXML private TableView<ClientModel> tabelaCliente;
     @FXML private TableColumn<ClientModel, Integer> idColumnCliente;
     @FXML private TableColumn<ClientModel, String> nomeColumnCliente;
+    @FXML private TableColumn<ClientModel, String> descricaoColumnCliente;
     @FXML private TableColumn<ClientModel, Integer> membrosColumnCliente;
     @FXML private TableColumn<ClientModel, Boolean> estadoColumnCliente;
     @FXML private TableColumn<ClientModel, HBox> accoesColumnCliente;
@@ -66,12 +68,15 @@ public class ClientController implements Initializable{
     private ObservableList<HistoricApartmentModel> listaHistorico;
     private HistoricService historicoService;
     
-    @FXML private TextArea textAreaDescricao;
+    @FXML private TextArea descricaoHistoricotextArea;
     @FXML private Label pisoBlocoLabel;
     @FXML private Label numeroLabel;
-    @FXML private Label descricaoLabel;
+    @FXML private Label descricaoApartamentoLabel;
     @FXML private Label tipoApartamentoLabel;
     @FXML private Label estadoLabel;
+    @FXML private Label telefoneLabel;
+    @FXML private Label emailLabel;
+    @FXML private Label descricaoMemberLabel;
     
 
     @Override
@@ -101,17 +106,25 @@ public class ClientController implements Initializable{
         LoadAndMoveUtilities.loadFXML(Modality.APPLICATION_MODAL, "/jmmultigest/novo-cliente.fxml");
     }
     
+    @FXML
+    void openNovoMembro(ActionEvent e){
+        LoadAndMoveUtilities.showAsPopUP(e, null);
+        LoadAndMoveUtilities.loadFXML(Modality.APPLICATION_MODAL, "/jmmultigest/novo-membro.fxml");
+    }
+    
     void setTableWidth(){
         idColumnCliente.prefWidthProperty()
                 .bind(tabelaCliente.widthProperty().multiply(0.10));
         nomeColumnCliente.prefWidthProperty()
-                .bind(tabelaCliente.widthProperty().multiply(0.30));
+                .bind(tabelaCliente.widthProperty().multiply(0.15));
         membrosColumnCliente.prefWidthProperty()
-                .bind(tabelaCliente.widthProperty().multiply(0.15));
+                .bind(tabelaCliente.widthProperty().multiply(0.10));
         estadoColumnCliente.prefWidthProperty()
-                .bind(tabelaCliente.widthProperty().multiply(0.15));
+                .bind(tabelaCliente.widthProperty().multiply(0.10));
         accoesColumnCliente.prefWidthProperty()
                 .bind(tabelaCliente.widthProperty().multiply(0.30));
+        descricaoColumnCliente.prefWidthProperty()
+                .bind(tabelaCliente.widthProperty().multiply(0.25));
         
         apartamentoColumnHistorico.prefWidthProperty()
                 .bind(tabelaHistorico.widthProperty().multiply(0.50));
@@ -129,6 +142,8 @@ public class ClientController implements Initializable{
         nomeColumnCliente.setCellValueFactory(new PropertyValueFactory<>("surname"));
         membrosColumnCliente.setCellValueFactory(new PropertyValueFactory<>("num_members"));
         estadoColumnCliente.setCellValueFactory(new PropertyValueFactory<>("status"));
+        descricaoColumnCliente.setCellValueFactory(new PropertyValueFactory<>("description"));
+        
 //        accoesColumnCliente 
     }
     
@@ -151,12 +166,58 @@ public class ClientController implements Initializable{
     }
     
     @FXML
-    void selecionaCliente(MouseEvent event){
+    void selecionaCliente(MouseEvent event) throws IOException, InterruptedException{
+        HistoricApartmentModel model = null;
+        List<HistoricApartmentModel> historicResult = historicoService.listHistoricData();
         ClientModel x = tabelaCliente.getSelectionModel().getSelectedItem();
         if(x != null){
-            textAreaDescricao.setText(x.getDescription());
+            /*
+            Setting data for member usage propuse
+            */
+            DataTransfer.setOtherData(x);
+            
             listaMembros.clear();
             listaMembros.addAll(x.getMembers());
+            /*
+            pegar os dados da lista historicResult, um por um e passar para um objecto HistoricApartmentModel
+            e verificar se no Historic existe um client_id semelhante ao do ClientModel x; caso exista, adicionar o 
+            HistoricApartmentModel a uma nova lista que sera adicionada ao listaHistorico
+            */
+            List<HistoricApartmentModel> aux_list = new ArrayList<>();
+            for (HistoricApartmentModel ha : historicResult) {
+                if(ha.getHistoric().getClient_id() == x.getId()){
+                    aux_list.add(ha);
+                    model = ha;
+                }
+            }
+            listaHistorico.clear();
+            listaHistorico.addAll(aux_list);
+            
+            /*
+            Show Address details
+            */
+            if(model != null){ 
+                descricaoHistoricotextArea.setText(model.getHistoric().getDescription());
+                descricaoApartamentoLabel.setText(model.getApartment().getDescription());
+                pisoBlocoLabel.setText(model.getApartment().getFloor());
+                numeroLabel.setText(model.getApartment().getNumber());
+                tipoApartamentoLabel.setText(model.getApartment().getType());
+                estadoLabel.setText(model.getApartment().getOccupation_state());
+            }else{
+                descricaoHistoricotextArea.setText(". . .");
+                descricaoApartamentoLabel.setText(". . .");
+                pisoBlocoLabel.setText(". . .");
+                numeroLabel.setText(". . .");
+                tipoApartamentoLabel.setText(". . .");
+                estadoLabel.setText(". . .");
+            }
+            /*
+            reset Client phone data
+            */
+            telefoneLabel.setText("...");
+            emailLabel.setText("...");
+            descricaoMemberLabel.setText("...");
+            
         }
     }
     
@@ -164,12 +225,25 @@ public class ClientController implements Initializable{
     void selecionaHistorico(MouseEvent event){
         HistoricApartmentModel x = tabelaHistorico.getSelectionModel().getSelectedItem();
         if(x != null){
-            textAreaDescricao.setText(x.getHistoric().getDescription());
+            descricaoHistoricotextArea.setText(x.getHistoric().getDescription());
             pisoBlocoLabel.setText(x.getApartment().getFloor());
             numeroLabel.setText(x.getApartment().getNumber());
-            descricaoLabel.setText(x.getApartment().getDescription());
             tipoApartamentoLabel.setText(x.getApartment().getType());
             estadoLabel.setText(x.getApartment().getOccupation_state());
+        }
+    }
+    
+    @FXML
+    void selecionamembro(MouseEvent e){
+        MemberModel x = tabelaMembro.getSelectionModel().getSelectedItem();
+        if(x != null){
+            telefoneLabel.setText(x.getPhone());
+            emailLabel.setText(x.getEmail());
+            descricaoMemberLabel.setText(x.getDescription());
+        }else{
+            telefoneLabel.setText("...");
+            emailLabel.setText("...");
+            descricaoMemberLabel.setText("...");
         }
     }
     private void fetchData() {
@@ -177,15 +251,15 @@ public class ClientController implements Initializable{
             try {
                 List<ClientModel> clientResult = build.getClients();
 //                List<MemberModel> memberResult = build.getClients()
-                List<HistoricApartmentModel> historicResult = historicoService.listHistoricData();
+//                List<HistoricApartmentModel> historicResult = historicoService.listHistoricData();
                 Platform.runLater(() -> {
                     listaClientes.clear();
                     listaClientes.addAll(clientResult);
                     
                     
-                    
-                    listaHistorico.clear();
-                    listaHistorico.addAll(historicResult);
+//                    
+//                    listaHistorico.clear();
+//                    listaHistorico.addAll(historicResult);
                 });
             } catch (Exception e) {
                 e.printStackTrace();

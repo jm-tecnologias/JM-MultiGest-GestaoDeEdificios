@@ -30,9 +30,9 @@ import jmmultigest.client.ClientModel;
 import jmmultigest.client.ClientService;
 import jmmultigest.client.MemberModel;
 import jmmultigest.client.MemberService;
-import jmmultigest.historic.HistoricApartmentModel;
 import jmmultigest.historic.HistoricModel;
 import jmmultigest.historic.HistoricService;
+import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
 import jmmultigest.utils.LoadAndMoveUtilities;
 
@@ -68,7 +68,7 @@ public class NovoCliententroller implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         user = DataTransfer.getUserData();
         build = DataTransfer.getBuildingData();
-        populateComboApartamento();
+        populateCombos();
         try {
             clientService = new ClientService();
             memberService = new MemberService();
@@ -93,7 +93,7 @@ public class NovoCliententroller implements Initializable{
         }
     }
     
-    void populateComboApartamento(){
+    void populateCombos(){
         List<String> lista = new ArrayList<>();
         apartamentMap = new HashMap<>();
         for(ApartmentModel ap : build.getApartments()){
@@ -115,7 +115,6 @@ public class NovoCliententroller implements Initializable{
             historic.setApartment_id(member.getApartment_id());
             historic.setOccupational_date(String.valueOf((entradaDatePicker.getValue() == null ? "" : entradaDatePicker.getValue())));
             historic.setFinal_date(String.valueOf((saidaDatePicker.getValue() == null ? "2626-01-01" : saidaDatePicker.getValue())));
-            historic.setDescription(historicoObservacoesArea.getText());
             historic.setNum_members(Integer.parseInt(agregadoField.getText()));
             historic.setDescription(historicoObservacoesArea.getText());
             historicService.create(historic);
@@ -161,8 +160,11 @@ public class NovoCliententroller implements Initializable{
             member.setName(nomeField.getText());
             member.setPhone(telefoneField.getText());
             member.setEmail(emailField.getText());
-            member.setDescription(clientObservacoesArea.getText());
+            member.setDescription(clientObservacoesArea.getText()+"(Primeiro membro)");
             model = memberService.create(member);
+        } catch (ApiException ex) {
+            System.out.println("Não foi possível registar o Membro: " + ex.getMessage());
+        
         } catch (IOException ex) {
             System.out.println("Erro (IOException) ao registar membro: "+ex);
         } catch (InterruptedException ex) {

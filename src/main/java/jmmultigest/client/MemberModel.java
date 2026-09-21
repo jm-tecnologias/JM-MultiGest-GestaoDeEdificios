@@ -20,6 +20,7 @@ public class MemberModel {
     private String surname;
     private String phone;
     private String email;
+    private String client_relationship;
     private String description;
     private boolean status;
     private String token;
@@ -32,7 +33,7 @@ public class MemberModel {
 
     public MemberModel(int user_id, int client_id, int apartment_id, 
             String doc_id, String name, String surname, String phone,
-            String email, String description
+            String email, String description, String client_relationship
             , List<VisitorModel> visitors
     ) {
         this.user_id = user_id;
@@ -43,6 +44,7 @@ public class MemberModel {
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+        this.client_relationship = client_relationship;
         this.description = description;
 //        this.visitors = visitors;
     }
@@ -117,6 +119,14 @@ public class MemberModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getClient_relationship() {
+        return client_relationship;
+    }
+
+    public void setClient_relationship(String client_relationship) {
+        this.client_relationship = client_relationship;
     }
 
     public String getDescription() {
