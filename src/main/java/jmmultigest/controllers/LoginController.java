@@ -12,13 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import jmmultigest.App;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.auth.UserModel;
 import jmmultigest.auth.UserService;
+import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
-import jmmultigest.utils.LoadAndMoveUtilities;
+import jmmultigest.utils.ErroUtil;
 
 /**
  *
@@ -30,11 +30,6 @@ public class LoginController implements Initializable{
     @FXML private TextField usernameTextField;
     
     private UserService userService;
-
-//    @FXML
-//    private void switchToDashboar() throws IOException {
-//        App.setRoot("dashboar");
-//    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,15 +43,28 @@ public class LoginController implements Initializable{
     }
     
     @FXML
-    void login(ActionEvent event) throws IOException, InterruptedException{
+    void login(ActionEvent event){
         UserModel user = new UserModel();
         user.setUsername(usernameTextField.getText());
         user.setPassword(passwordPasswordField.getText());
-        UserEmployeeModel x = userService.login(user);
-        if( x != null && 
-                userService.login(user) instanceof UserEmployeeModel){
-            DataTransfer.setUserData(x);
-            App.setRoot("main");
-        }       
+        try{
+            UserEmployeeModel x = userService.login(user);
+            if( x != null){
+                DataTransfer.setUserData(x);
+                App.setRoot("main");
+            } 
+        } catch (ApiException ex) {
+            ErroUtil.showError("Não foi possível Logar no sistema",ex.getMessage());
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }      
     }
 }

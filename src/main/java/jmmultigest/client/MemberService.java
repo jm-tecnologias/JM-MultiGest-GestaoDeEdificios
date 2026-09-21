@@ -56,15 +56,6 @@ public class MemberService {
 
         String jsonResponse = response.body();
 //        System.out.println("Resposta: " + jsonResponse);
-
-//        if (response.statusCode() != 200 && response.statusCode() != 201) {
-//            throw new RuntimeException(
-//                    "HTTP ERRO: "
-//                    + response.statusCode()
-//                    + " - "
-//                    + response.body()
-//            );
-//        }
         if (response.statusCode() != 200 && response.statusCode() != 201) {
             String message = "Erro desconhecido.";
             try {

@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -21,11 +20,11 @@ import javafx.stage.Stage;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.client.ClientModel;
-import jmmultigest.client.ClientService;
 import jmmultigest.client.MemberModel;
 import jmmultigest.client.MemberService;
 import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
+import jmmultigest.utils.ErroUtil;
 import jmmultigest.utils.LoadAndMoveUtilities;
 
 /**
@@ -97,49 +96,21 @@ public class NovoMembroController implements Initializable{
             model.setDescription(membroObservacoesArea.getText());
             memberService.create(model);
         } catch (ApiException ex) {
-            showError("Não foi possível registar o Membro",ex.getMessage());
+            ErroUtil.showError("Não foi possível registar o Membro",ex.getMessage());
         } catch (NumberFormatException ex) {
-
-        showError(
+            ErroUtil.showError(
                 "Dados inválidos",
-                "O número de membros deve ser um valor numérico."
-        );
-
-    } catch (IOException ex) {
-
-        showError(
+                "O número de membros deve ser um valor numérico.");
+        } catch (IOException ex) {
+            ErroUtil.showError(
                 "Erro de comunicação",
-                "Não foi possível comunicar com a API."
-        );
-
-        ex.printStackTrace();
-
-    } catch (InterruptedException ex) {
-
-        Thread.currentThread().interrupt();
-
-        showError(
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
                 "Operação interrompida",
-                "A comunicação com o servidor foi interrompida."
-        );
-
+                "A comunicação com o servidor foi interrompida.");
+        }
     }
-    }
-    
-    private void showError(
-        String title,
-        String message
-) {
-
-    Alert alert = new Alert(
-            Alert.AlertType.ERROR
-    );
-
-    alert.setTitle(title);
-    alert.setHeaderText(null);
-    alert.setContentText(message);
-
-    alert.showAndWait();
-}
-    
 }
