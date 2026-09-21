@@ -168,7 +168,7 @@
                         <Label styleClass="form-required-note" text="* Campos obrigatórios" />
                         <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
                         <Button fx:id="cancelarClienteButton" minWidth="100.0" mnemonicParsing="false" onAction="#close" styleClass="secondary-button" text="Cancelar" />
-                        <Button fx:id="guardarClienteButton" minWidth="130.0" mnemonicParsing="false" onAction="#save" styleClass="primary-button" text="Guardar Cliente" />
+                        <Button fx:id="guardarClienteButton" minWidth="130.0" mnemonicParsing="false" onAction="#chooseAction" styleClass="primary-button" text="Guardar Cliente" />
                     </children>
                 </HBox>
             </children>

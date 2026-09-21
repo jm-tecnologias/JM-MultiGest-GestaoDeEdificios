@@ -16,7 +16,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -53,6 +55,8 @@ public class ClientController implements Initializable{
     private ObservableList<ClientModel> listaClientes;
     private ClientService clientService;
     
+    
+     
     @FXML private TableView<MemberModel> tabelaMembro;
     @FXML private TableColumn<MemberModel, Integer> idColumnMembro;
     @FXML private TableColumn<MemberModel, String> docIdColumnMembro;
@@ -83,7 +87,6 @@ public class ClientController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         user = DataTransfer.getUserData();
         build = DataTransfer.getBuildingData();
-        
         try {
             setTableWidth();
             clientService = new ClientService();
@@ -143,8 +146,48 @@ public class ClientController implements Initializable{
         membrosColumnCliente.setCellValueFactory(new PropertyValueFactory<>("num_members"));
         estadoColumnCliente.setCellValueFactory(new PropertyValueFactory<>("status"));
         descricaoColumnCliente.setCellValueFactory(new PropertyValueFactory<>("description"));
-        
-//        accoesColumnCliente 
+        accoesColumnCliente.setCellFactory(column -> new TableCell<ClientModel, HBox>(){
+            private final Button btnEditar = new Button("[ ✎ ]");
+            private final Button btnEliminar = new Button("[ 🗑 ]");
+            private final HBox container = new HBox(5);
+            
+            {
+                container.getChildren().addAll(
+                        btnEditar,
+                        btnEliminar
+                );
+                
+                btnEditar.setOnAction(e -> {
+                    ClientModel x = getTableView()
+                            .getItems().get(getIndex());
+                    editarClient(e, x);
+                });
+                
+                btnEliminar.setOnAction(e -> {
+                    ClientModel x = getTableView()
+                            .getItems().get(getIndex());
+                    // Funcao para desactivar 
+                });
+            }
+            @Override
+            protected void updateItem(HBox item, boolean empty){
+                super.updateItem(item, empty);
+                if(empty){
+                    setGraphic(null);
+                }else{
+                    setGraphic(container);
+                }
+            }
+        });
+    }
+    
+    void editarClient(ActionEvent e, ClientModel client){
+        if(client == null){
+            return;
+        }
+        DataTransfer.setOtherData(client);
+        LoadAndMoveUtilities.showAsPopUP(e, null);
+        LoadAndMoveUtilities.loadFXML(Modality.APPLICATION_MODAL, "/jmmultigest/novo-cliente.fxml");
     }
     
     void showHistoric(){

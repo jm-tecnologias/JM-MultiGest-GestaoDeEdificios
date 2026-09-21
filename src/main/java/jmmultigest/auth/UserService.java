@@ -36,7 +36,7 @@ public class UserService {
 
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(API_URL + "/building/auth/employee/login"))
+                .uri(URI.create(API_URL + "/building/auth/user/employee/login"))
                 .header(
                         "Content-Type",
                         "application/json"

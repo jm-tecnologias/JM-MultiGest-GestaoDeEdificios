@@ -70,6 +70,7 @@ public class NovoCliententroller implements Initializable{
         user = DataTransfer.getUserData();
         build = DataTransfer.getBuildingData();
         populateCombos();
+        setDataToEdit();
         try {
             clientService = new ClientService();
             memberService = new MemberService();
@@ -104,9 +105,36 @@ public class NovoCliententroller implements Initializable{
         apartamentoCombo.setItems(FXCollections.observableArrayList(lista));
         estadoCombo.setItems(FXCollections.observableArrayList("Livre","Ocupado"));
     }
+    void setDataToEdit(){
+        ClientModel x = (ClientModel) DataTransfer.getOtherData();
+        String[] fullName = x.getSurname().split(",");
+        nomeField.setText(fullName[1]);
+        apelidoField.setText(fullName[0]);
+        clientObservacoesArea.setText(x.getDescription());
+        agregadoField.setText(x.getNum_members()+"");
+        
+//        historicoObservacoesArea.setEditable(false);
+//        entradaDatePicker.setEditable(false);
+//        saidaDatePicker.setEditable(false);
+//        MemberModel m = x.getMembers().get(0);
+//        telefoneField.setText(m.getPhone());
+//        emailField.setText(m.getEmail());
+//        docIDField.setText(m.getDoc_id());
+    }
     
     @FXML
-    void save(ActionEvent e) throws IOException, JsonProcessingException, InterruptedException{
+    void chooseAction(ActionEvent e){
+        ClientModel cli = (ClientModel) DataTransfer.getOtherData();
+        if(cli != null && 
+               cli instanceof ClientModel){
+            updateClient(cli);
+        }else{
+            saveClient();
+        }
+    }
+    
+    
+    void save() throws IOException, JsonProcessingException, InterruptedException{
         MemberModel member = saveMember();
         HistoricModel historic;
         try {
@@ -158,7 +186,72 @@ public class NovoCliententroller implements Initializable{
         return model;
     }
     
-    MemberModel saveMember() throws IOException, JsonProcessingException, InterruptedException{
+    ClientModel updateClient(ClientModel cli){
+        ClientModel client;
+        ClientModel model = new ClientModel();
+        try {
+            client = new ClientModel();
+            client.setUser_id(user.getUser().getId());
+            client.setSurname(apelidoField.getText()+", "+nomeField.getText());
+            client.setDescription(clientObservacoesArea.getText());
+            client.setNum_members(Integer.parseInt(agregadoField.getText()));
+            client.setBuilding_id(build.getId());
+            client.setStatus(cli.isStatus());
+            model = clientService.create(client);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao registar o Cliente",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "O número de membros deve ser um valor numérico.");
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+        return model;
+    }
+    
+    MemberModel saveMember(){
+        ClientModel client = saveClient();
+        ApartmentModel ap = apartamentMap.get(apartamentoCombo.getValue());
+        MemberModel member;
+        MemberModel model = new MemberModel();
+        try {
+            member = new MemberModel();
+            member.setUser_id(user.getUser().getId());
+            member.setClient_id(client.getId());
+            member.setDoc_id(docIDField.getText());
+            member.setApartment_id(ap.getId());  
+            member.setSurname(apelidoField.getText());
+            member.setName(nomeField.getText());
+            member.setPhone(telefoneField.getText());
+            member.setEmail(emailField.getText());
+            member.setDescription(clientObservacoesArea.getText()+"(Primeiro membro)");
+            model = memberService.create(member);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao registar o Cliente(Fase 2 - Membro)",ex.getMessage());
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+        return model;
+    }
+    
+    MemberModel updateMember(){
         ClientModel client = saveClient();
         ApartmentModel ap = apartamentMap.get(apartamentoCombo.getValue());
         MemberModel member;

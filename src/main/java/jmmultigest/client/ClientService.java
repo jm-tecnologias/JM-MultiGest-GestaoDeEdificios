@@ -112,18 +112,59 @@ public class ClientService {
         return objectMapper.readValue(jsonResponse, ClientModel.class);
     }
 
-//    public static void main(String[] args) throws IOException, InterruptedException {
+    public ClientModel update(int id, ClientModel client) throws JsonProcessingException, IOException, InterruptedException, ApiException {
+        String jsonBody = objectMapper.writeValueAsString(client);
+//        System.out.println("JSON Envioado: " + jsonBody);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL + "/building/clients/update/" + id))
+                .header(
+                        "Content-Type",
+                        "application/json"
+                )
+                .header(
+                        "Accept",
+                        "application/json"
+                )
+                .method("PATCH", HttpRequest.BodyPublishers
+                        .ofString(jsonBody))
+                .build();
+        HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString());
+
+        String jsonResponse = response.body();
+//        System.out.println("Resposta: " + jsonResponse);
+
+        if (response.statusCode() != 200 && response.statusCode() != 201) {
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
+            );
+        }
+        return objectMapper.readValue(jsonResponse, ClientModel.class);
+    }
+
+//    public static void main(String[] args) throws IOException, InterruptedException, JsonProcessingException, ApiException {
 //        ClientService service = new ClientService();
 //        ClientModel client = new ClientModel();
+//        client.setSurname("Mula, Amilcar");
+//        client.setNum_members(3);
+//        client.setDescription("Teste de actualizacao");
+//        
 //        client.setUser_id(1);
-//        client.setSurname("dff, Mael");
-//        client.setNum_members(5);
-//        client.setDescription("Membro Principal");
 //        client.setBuilding_id(1);
-//        ClientModel xx = service.create(client);
-//        System.out.println("TESTE: "+xx.getId());
-//        System.out.println("TESTE: "+xx.getSurname());
-//        System.out.println("TESTE: "+xx.getBuilding_id());
-//        System.out.println("TESTE: "+xx.getCreated_at());
+//        client.setStatus(true);
+//        service.update(1, client);
 //    }
 }
