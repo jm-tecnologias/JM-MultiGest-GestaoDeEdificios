@@ -6,6 +6,7 @@ package jmmultigest.historic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
@@ -13,6 +14,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import jmmultigest.client.MemberModel;
+import jmmultigest.utils.ApiException;
 
 /**
  *
@@ -45,7 +48,7 @@ public class HistoricService {
         
     }
     
-    public HistoricModel create(HistoricModel model) throws JsonProcessingException, IOException, InterruptedException {
+    public HistoricModel create(HistoricModel model) throws JsonProcessingException, IOException, InterruptedException, ApiException {
         String jsonBody = objectMapper.writeValueAsString(model);
 //        System.out.println("JSON Envioado: " + jsonBody);
 
@@ -72,11 +75,62 @@ public class HistoricService {
 //        System.out.println("Resposta: " + jsonResponse);
 
         if (response.statusCode() != 200 && response.statusCode() != 201) {
-            throw new RuntimeException(
-                    "HTTP ERRO: "
-                    + response.statusCode()
-                    + " - "
-                    + response.body()
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
+            );
+        }
+        return objectMapper.readValue(jsonResponse, HistoricModel.class);
+    }
+    
+    public HistoricModel update(String created_at, HistoricModel historic) throws JsonProcessingException, IOException, InterruptedException, ApiException {
+        String jsonBody = objectMapper.writeValueAsString(historic);
+//        System.out.println("JSON Envioado: " + jsonBody);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL + "/building/client/historic/update/" + created_at.split("\\.")[0]))
+                .header(
+                        "Content-Type",
+                        "application/json"
+                )
+                .header(
+                        "Accept",
+                        "application/json"
+                )
+                .method("PATCH", HttpRequest.BodyPublishers
+                        .ofString(jsonBody))
+                .build();
+        HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString());
+
+        String jsonResponse = response.body();
+//        System.out.println("Resposta: " + jsonResponse);
+
+        if (response.statusCode() != 200 && response.statusCode() != 201) {
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
             );
         }
         return objectMapper.readValue(jsonResponse, HistoricModel.class);

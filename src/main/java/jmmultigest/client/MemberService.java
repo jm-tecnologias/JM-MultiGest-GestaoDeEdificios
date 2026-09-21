@@ -74,6 +74,49 @@ public class MemberService {
         }
         return objectMapper.readValue(jsonResponse, MemberModel.class);
     }
+    
+    public MemberModel update(int id, MemberModel member) throws JsonProcessingException, IOException, InterruptedException, ApiException {
+        String jsonBody = objectMapper.writeValueAsString(member);
+//        System.out.println("JSON Envioado: " + jsonBody);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL + "/building/clients/members/update/" + id))
+                .header(
+                        "Content-Type",
+                        "application/json"
+                )
+                .header(
+                        "Accept",
+                        "application/json"
+                )
+                .method("PATCH", HttpRequest.BodyPublishers
+                        .ofString(jsonBody))
+                .build();
+        HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString());
+
+        String jsonResponse = response.body();
+//        System.out.println("Resposta: " + jsonResponse);
+
+        if (response.statusCode() != 200 && response.statusCode() != 201) {
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
+            );
+        }
+        return objectMapper.readValue(jsonResponse, MemberModel.class);
+    }
 
 //    public static void main(String[] args) throws IOException, InterruptedException, ApiException {
 //        MemberService service = new MemberService();
