@@ -142,6 +142,13 @@ public class NovoCliententroller implements Initializable{
                cli instanceof ClientModel){
             updateClient(cli);
         }else{
+            /*
+            Pode ser melhorado:
+            Definir o periodo de execucao da funcao para 
+            certo intervalo de segundos
+            por exemplo, a funcao so pode ser executado do intervalo
+            hh:mm:05s a hh:mm:55s da mesma hora e minutos
+            */
             saveHistorico();
         }
     }

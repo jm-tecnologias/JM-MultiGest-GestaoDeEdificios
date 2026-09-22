@@ -14,22 +14,31 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.NovoMembroController">
     <children>
-        <VBox minHeight="0.0" minWidth="0.0" spacing="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <VBox minHeight="0.0" minWidth="0.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <HBox alignment="CENTER_LEFT" minWidth="0.0" prefHeight="62.0" styleClass="page-header">
+                <HBox alignment="CENTER_LEFT" minWidth="0.0" prefHeight="62.0" style="-fx-background-color: #333;" styleClass="page-header">
                     <children>
                         <VBox alignment="CENTER_LEFT" minWidth="0.0" spacing="2.0">
                             <children>
-                                <Label styleClass="page-title" text="Novo Membro" />
-                                <Label styleClass="page-subtitle" text="Adicione um membro e associe-o ao respectivo cliente" />
+                                <Label styleClass="page-title" text="Novo Membro" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                                <Label styleClass="page-subtitle" text="Adicione um membro e associe-o ao respectivo cliente" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
                             </children>
                         </VBox>
                         <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
-                        <Label styleClass="form-context-badge" text="MEMBROS" />
                     </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
                 </HBox>
 
                 <ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" minHeight="0.0" minWidth="0.0" pannable="false" styleClass="form-scroll" VBox.vgrow="ALWAYS">
@@ -40,8 +49,14 @@
                                     <children>
                                         <VBox spacing="2.0">
                                             <children>
-                                                <Label styleClass="form-section-title" text="Identificação do membro" />
-                                                <Label styleClass="form-section-subtitle" text="Informação pessoal e contacto" />
+                                                <Label styleClass="form-section-title" text="Identificação do membro">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
+                                                <Label styleClass="form-section-subtitle" text="Informação pessoal e contacto">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
                                             </children>
                                         </VBox>
                               <GridPane hgap="16.0" minWidth="0.0" vgap="10.0">
@@ -52,31 +67,46 @@
                                  <children>
                                     <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                        <children>
-                                          <Label styleClass="field-label" text="Nome *" />
+                                          <Label styleClass="field-label" text="Nome *">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                           <TextField fx:id="nomeField" maxWidth="1.7976931348623157E308" promptText="Carlos" styleClass="form-input" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                        <children>
-                                          <Label styleClass="field-label" text="Apelido *" />
+                                          <Label styleClass="field-label" text="Apelido *">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                           <TextField fx:id="apelidoField" maxWidth="1.7976931348623157E308" promptText="Mula" styleClass="form-input" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                        <children>
-                                          <Label styleClass="field-label" text="Telefone *" />
+                                          <Label styleClass="field-label" text="Telefone *">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                           <TextField fx:id="telefoneField" maxWidth="1.7976931348623157E308" promptText="Ex.: 84 000 0000" styleClass="form-input" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <Label styleClass="field-label" text="E-mail" />
+                                          <Label styleClass="field-label" text="E-mail">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                           <TextField fx:id="emailField" maxWidth="1.7976931348623157E308" promptText="email@exemplo.com" styleClass="form-input" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0" GridPane.rowIndex="2">
                                        <children>
-                                          <Label styleClass="field-label" text="Doc. ID *" />
+                                          <Label styleClass="field-label" text="Doc. ID *">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                           <TextField fx:id="docIDField" maxWidth="1.7976931348623157E308" promptText="Ex.: 110100692835M" styleClass="form-input" />
                                        </children>
                                     </VBox>
@@ -94,12 +124,18 @@
                                     <children>
                                         <VBox spacing="2.0">
                                             <children>
-                                                <Label styleClass="form-section-title" text="Vínculo e acesso" />
-                                                <Label styleClass="form-section-subtitle" text="Relação com o cliente e situação no edifício" />
+                                                <Label styleClass="form-section-title" text="Vínculo e acesso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
+                                                <Label styleClass="form-section-subtitle" text="Relação com o cliente e situação no edifício">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
                                             </children>
                                         </VBox>
 
-                                        <GridPane hgap="16.0" minWidth="0.0" vgap="10.0">
+                                        <GridPane hgap="5.0" minWidth="0.0" vgap="10.0">
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
                                                 <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" percentWidth="50.0" />
@@ -108,13 +144,19 @@
                                             <children>
                                                 <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                                     <children>
-                                                        <Label styleClass="field-label" text="Relação com o cliente" />
+                                                        <Label styleClass="field-label" text="Relação com o cliente">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                                         <ComboBox fx:id="membroRelacaoCombo" maxWidth="1.7976931348623157E308" promptText="Ex.: Familiar" styleClass="form-input" />
                                                     </children>
                                                 </VBox>
-                                                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                                <VBox prefHeight="110.0" prefWidth="386.0" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                     <children>
-                                                        <Label styleClass="field-label" text="Observações" />
+                                                        <Label styleClass="field-label" text="Observações">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                                         <TextArea fx:id="membroObservacoesArea" maxWidth="1.7976931348623157E308" minHeight="76.0" prefHeight="88.0" promptText="Notas adicionais sobre o membro..." styleClass="form-textarea" wrapText="true" />
                                                     </children>
                                                 </VBox>
@@ -133,15 +175,24 @@
                             </padding>
                         </VBox>
                     </content>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
                 </ScrollPane>
 
-                <HBox alignment="CENTER_RIGHT" minWidth="0.0" spacing="10.0" styleClass="form-actions">
+                <HBox alignment="CENTER_RIGHT" minWidth="0.0" prefHeight="38.0" prefWidth="800.0" spacing="10.0" styleClass="form-actions">
                     <children>
-                        <Label styleClass="form-required-note" text="* Campos obrigatórios" />
+                        <Label styleClass="form-required-note" text="* Campos obrigatórios" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                         <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
                         <Button fx:id="cancelarMembroButton" minWidth="100.0" mnemonicParsing="false" onAction="#close" styleClass="secondary-button" text="Cancelar" />
-                        <Button fx:id="guardarMembroButton" minWidth="130.0" mnemonicParsing="false" onAction="#saveMember" styleClass="primary-button" text="Guardar Membro" />
+                        <Button fx:id="guardarMembroButton" minWidth="130.0" mnemonicParsing="false" onAction="#chooseAction" styleClass="primary-button" text="Guardar Membro" />
                     </children>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
                 </HBox>
             </children>
         </VBox>

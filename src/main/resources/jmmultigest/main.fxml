@@ -132,6 +132,10 @@
             </VBox>
          </content>
       </ScrollPane>
-      <AnchorPane fx:id="mainViewer" prefHeight="550.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <ScrollPane layoutX="357.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+        <content>
+          <AnchorPane fx:id="mainViewer" />
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

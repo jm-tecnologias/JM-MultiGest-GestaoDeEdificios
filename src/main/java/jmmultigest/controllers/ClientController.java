@@ -22,6 +22,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -65,6 +66,9 @@ public class ClientController implements Initializable{
     private ObservableList<MemberModel> listaMembros;
     private MemberService memberService;
     
+    private Object[] client_member;
+    
+    
     @FXML private TableView<HistoricApartmentModel> tabelaHistorico;
     @FXML private TableColumn<HistoricApartmentModel, String> apartamentoColumnHistorico;
     @FXML private TableColumn<HistoricApartmentModel, String> entradaColumnHistorico;
@@ -72,21 +76,22 @@ public class ClientController implements Initializable{
     private ObservableList<HistoricApartmentModel> listaHistorico;
     private HistoricService historicoService;
     
+    
     @FXML private TextArea descricaoHistoricotextArea;
     @FXML private TextArea descricaoMemberTextArea;
-    @FXML private Label pisoBlocoLabel;
-    @FXML private Label numeroLabel;
-    @FXML private Label descricaoApartamentoLabel;
-    @FXML private Label tipoApartamentoLabel;
-    @FXML private Label estadoLabel;
-    @FXML private Label telefoneLabel;
-    @FXML private Label emailLabel;
+    @FXML private TextField pisoField;
+    @FXML private TextField numeroField;
+    @FXML private TextArea descricaoApartamentoTextArea;
+    @FXML private TextField tipoField;
+    @FXML private TextField contactField;
+    @FXML private TextField emailField;
     
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         user = DataTransfer.getUserData();
         build = DataTransfer.getBuildingData();
+        client_member = new Object[2];
         try {
             setTableWidth();
             clientService = new ClientService();
@@ -111,23 +116,35 @@ public class ClientController implements Initializable{
     
     @FXML
     void openNovoMembro(ActionEvent e){
+        
         LoadAndMoveUtilities.showAsPopUP(e, null);
         LoadAndMoveUtilities.loadFXML(Modality.APPLICATION_MODAL, "/jmmultigest/novo-membro.fxml");
     }
     
     void setTableWidth(){
         idColumnCliente.prefWidthProperty()
-                .bind(tabelaCliente.widthProperty().multiply(0.10));
+                .bind(tabelaCliente.widthProperty().multiply(0.05));
         nomeColumnCliente.prefWidthProperty()
-                .bind(tabelaCliente.widthProperty().multiply(0.15));
+                .bind(tabelaCliente.widthProperty().multiply(0.25));
         membrosColumnCliente.prefWidthProperty()
-                .bind(tabelaCliente.widthProperty().multiply(0.10));
+                .bind(tabelaCliente.widthProperty().multiply(0.15));
         estadoColumnCliente.prefWidthProperty()
                 .bind(tabelaCliente.widthProperty().multiply(0.10));
-        accoesColumnCliente.prefWidthProperty()
-                .bind(tabelaCliente.widthProperty().multiply(0.30));
         descricaoColumnCliente.prefWidthProperty()
                 .bind(tabelaCliente.widthProperty().multiply(0.25));
+        accoesColumnCliente.prefWidthProperty()
+                .bind(tabelaCliente.widthProperty().multiply(0.20));
+        
+        
+        idColumnMembro.prefWidthProperty()
+                .bind(tabelaMembro.widthProperty().multiply(0.10));
+        docIdColumnMembro.prefWidthProperty()
+                .bind(tabelaMembro.widthProperty().multiply(0.30));
+        nomeColumnMembro.prefWidthProperty()
+                .bind(tabelaMembro.widthProperty().multiply(0.30));
+        apelidoColumnMembro.prefWidthProperty()
+                .bind(tabelaMembro.widthProperty().multiply(0.30));
+        
         
         apartamentoColumnHistorico.prefWidthProperty()
                 .bind(tabelaHistorico.widthProperty().multiply(0.50));
@@ -218,6 +235,7 @@ public class ClientController implements Initializable{
             Setting data for member usage propuse
             */
             DataTransfer.setOtherData(x);
+            client_member[0] = x;
             
             listaMembros.clear();
             listaMembros.addAll(x.getMembers());
@@ -241,25 +259,31 @@ public class ClientController implements Initializable{
             */
             if(model != null){ 
                 descricaoHistoricotextArea.setText(model.getHistoric().getDescription());
-                descricaoApartamentoLabel.setText(model.getApartment().getDescription());
-                pisoBlocoLabel.setText(model.getApartment().getFloor());
-                numeroLabel.setText(model.getApartment().getNumber());
-                tipoApartamentoLabel.setText(model.getApartment().getType());
-                estadoLabel.setText(model.getApartment().getOccupation_state());
+                descricaoApartamentoTextArea.setText(model.getApartment().getDescription());
+                pisoField.setText(model.getApartment().getFloor());
+                numeroField.setText(model.getApartment().getNumber());
+                tipoField.setText(model.getApartment().getType());
             }else{
-                descricaoHistoricotextArea.setText(". . .");
-                descricaoApartamentoLabel.setText(". . .");
-                pisoBlocoLabel.setText(". . .");
-                numeroLabel.setText(". . .");
-                tipoApartamentoLabel.setText(". . .");
-                estadoLabel.setText(". . .");
+                descricaoHistoricotextArea.clear();
+                descricaoHistoricotextArea.setPromptText("Descrição...");
+                descricaoApartamentoTextArea.clear();
+                descricaoApartamentoTextArea.setPromptText("Descrição...");
+                pisoField.clear();
+                pisoField.setPromptText("Piso/Bloco");
+                numeroField.clear();
+                numeroField.setPromptText("Nr. AP");
+                tipoField.clear();
+                tipoField.setPromptText("Tipo de apartamento");
             }
             /*
             reset Client phone data
             */
-            telefoneLabel.setText("...");
-            emailLabel.setText("...");
-            descricaoMemberTextArea.setText("...");
+            contactField.clear();
+            emailField.clear();
+            descricaoMemberTextArea.clear();
+            contactField.setPromptText("Contacto...");
+            emailField.setPromptText("E-mail...");
+            descricaoMemberTextArea.setPromptText("Descrição...");
             
         }
     }
@@ -269,10 +293,9 @@ public class ClientController implements Initializable{
         HistoricApartmentModel x = tabelaHistorico.getSelectionModel().getSelectedItem();
         if(x != null){
             descricaoHistoricotextArea.setText(x.getHistoric().getDescription());
-            pisoBlocoLabel.setText(x.getApartment().getFloor());
-            numeroLabel.setText(x.getApartment().getNumber());
-            tipoApartamentoLabel.setText(x.getApartment().getType());
-            estadoLabel.setText(x.getApartment().getOccupation_state());
+            pisoField.setText(x.getApartment().getFloor());
+            numeroField.setText(x.getApartment().getNumber());
+            tipoField.setText(x.getApartment().getType());
         }
     }
     
@@ -280,13 +303,15 @@ public class ClientController implements Initializable{
     void selecionamembro(MouseEvent e){
         MemberModel x = tabelaMembro.getSelectionModel().getSelectedItem();
         if(x != null){
-            telefoneLabel.setText(x.getPhone());
-            emailLabel.setText(x.getEmail());
+            client_member[1] = x;
+            DataTransfer.setOtherData(client_member);
+            contactField.setText(x.getPhone());
+            emailField.setText(x.getEmail());
             descricaoMemberTextArea.setText(x.getDescription());
         }else{
-            telefoneLabel.setText("...");
-            emailLabel.setText("...");
-            descricaoMemberTextArea.setText("...");
+            contactField.setPromptText("Contacto...");
+            emailField.setPromptText("E-mail...");
+            descricaoMemberTextArea.setPromptText("Descrição...");
         }
     }
     private void fetchData() {
