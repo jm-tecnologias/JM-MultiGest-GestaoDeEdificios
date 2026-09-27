@@ -72,15 +72,10 @@ public class NovoCliententroller implements Initializable{
         build = DataTransfer.getBuildingData();
         populateCombos();
         setDataToEdit();
-        try {
-            clientService = new ClientService();
-            memberService = new MemberService();
-            historicService = new HistoricService();
-        } catch (IOException ex) {
-            System.out.println("Erro (IOException) ao inicializar servico: "+ex);
-        } catch (InterruptedException ex) {
-            System.out.println("Erro (InterruptedException) ao inicializar servico: "+ex);
-        }
+        clientService = new ClientService();
+        memberService = new MemberService();
+        historicService = new HistoricService();
+      
         
     }
     @FXML

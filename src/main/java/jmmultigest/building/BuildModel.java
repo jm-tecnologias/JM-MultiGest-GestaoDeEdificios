@@ -10,7 +10,6 @@ import jmmultigest.apartments.ApartmentModel;
 import jmmultigest.client.ClientModel;
 import jmmultigest.department.DepartmentModel;
 import jmmultigest.employee.EmployeeModel;
-import jmmultigest.historic.HistoricModel;
 
 /**
  *

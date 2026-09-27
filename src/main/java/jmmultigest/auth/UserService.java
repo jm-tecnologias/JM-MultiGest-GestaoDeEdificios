@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import jmmultigest.utils.APIHelpper;
 import jmmultigest.utils.ApiException;
 
 /**
@@ -19,24 +20,15 @@ import jmmultigest.utils.ApiException;
  */
 public class UserService {
 
-    private static final String API_URL = "http://127.0.0.1:8000";
-    private final HttpClient httpClient;
-    ;
-    private final ObjectMapper objectMapper;
-
-    public UserService() throws IOException, InterruptedException {
-        this.httpClient = HttpClient.newHttpClient();
-        this.objectMapper = new ObjectMapper();
-    }
 
     public UserEmployeeModel login(UserModel user) throws IOException, InterruptedException, ApiException {
-        String jsonBody = objectMapper.writeValueAsString(user);
+        String jsonBody = APIHelpper.objectMapper.writeValueAsString(user);
 //        System.out.println("JSON Enviado:");
 //        System.out.println(jsonBody);
 
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(API_URL + "/building/auth/user/employee/login"))
+                .uri(URI.create(APIHelpper.URL + "/building/auth/user/employee/login"))
                 .header(
                         "Content-Type",
                         "application/json"
@@ -50,7 +42,7 @@ public class UserService {
                                 .ofString(jsonBody)
                 )
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
@@ -60,7 +52,7 @@ public class UserService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -72,7 +64,7 @@ public class UserService {
                     message
             );
         }
-        return objectMapper.readValue(jsonResponse, UserEmployeeModel.class);
+        return APIHelpper.objectMapper.readValue(jsonResponse, UserEmployeeModel.class);
     }
 
 //    public static void main(String[] args) throws IOException, InterruptedException {

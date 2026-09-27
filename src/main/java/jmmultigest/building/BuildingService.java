@@ -14,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import jmmultigest.utils.APIHelpper;
 import jmmultigest.utils.ApiException;
 
 /**
@@ -22,23 +23,13 @@ import jmmultigest.utils.ApiException;
  */
 public class BuildingService {
 
-    private static final String API_URL = "http://127.0.0.1:8000";
-    private final HttpClient httpClient;
-    ;
-    private final ObjectMapper objectMapper;
-
-    public BuildingService() throws IOException, InterruptedException {
-        this.httpClient = HttpClient.newHttpClient();
-        this.objectMapper = new ObjectMapper();
-    }
-
     public List<BuildModel> listBuildings() throws IOException, InterruptedException, ApiException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(API_URL + "/building/list-all"))
+                .uri(URI.create(APIHelpper.URL + "/building/list-all"))
                 .GET()
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
@@ -48,7 +39,7 @@ public class BuildingService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -61,7 +52,7 @@ public class BuildingService {
             );
         }
 
-        return objectMapper.readValue(jsonResponse,
+        return APIHelpper.objectMapper.readValue(jsonResponse,
                 new TypeReference<List<BuildModel>>() {
         });
     }
@@ -69,10 +60,10 @@ public class BuildingService {
     public BuildModel getBuildingData(int building_id) throws IOException, InterruptedException, ApiException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(API_URL + "/building/get/" + building_id))
+                .uri(URI.create(APIHelpper.URL + "/building/get/" + building_id))
                 .GET()
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
@@ -82,7 +73,7 @@ public class BuildingService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -95,7 +86,7 @@ public class BuildingService {
             );
         }
 
-        return objectMapper.readValue(jsonResponse, BuildModel.class);
+        return APIHelpper.objectMapper.readValue(jsonResponse, BuildModel.class);
     }
 
 //    public static void main(String[] args) throws IOException, InterruptedException {

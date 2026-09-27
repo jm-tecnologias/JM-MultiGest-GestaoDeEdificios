@@ -57,26 +57,20 @@ public class NovoMembroController implements Initializable{
         user = DataTransfer.getUserData();
         build = DataTransfer.getBuildingData();
         setDataToEdit();
-        try{
-            memberService = new MemberService();
-        } catch (IOException ex) {
-            System.out.println("Erro (IOException) ao inicializar servico: "+ex);
-        } catch (InterruptedException ex) {
-            System.out.println("Erro (InterruptedException) ao inicializar servico: "+ex);
-        }
+        memberService = new MemberService();
     }
     
     @FXML
     void chooseAction(ActionEvent e){
-        Object[] client_member = (Object[]) DataTransfer.getOtherData();
-        ClientModel cli = (ClientModel) client_member[0];
-        MemberModel mem = (MemberModel) client_member[1];
-        if(cli != null && 
-               cli instanceof ClientModel){
-            updateMember(cli, mem);
-        }else{
-           
+        if(DataTransfer.getOtherData() != null && 
+                DataTransfer.getOtherData() instanceof ClientModel){
             saveMember();
+        }else{
+            Object[] client_member = (Object[]) DataTransfer.getOtherData();
+            ClientModel cli = (ClientModel) client_member[0];
+            MemberModel mem = (MemberModel) client_member[1];
+            updateMember(cli, mem);
+            
         }
     }
     

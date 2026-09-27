@@ -18,6 +18,5 @@ module jmmultigest {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires java.net.http;
-    requires javafx.graphicsEmpty;
-
+    requires javafx.graphicsEmpty; 
 }

@@ -24,6 +24,8 @@ public class MemberModel {
     private String description;
     private boolean status;
     private String token;
+    private String profile_pic_url;
+    private String barcode_url;
     private List<VisitorModel> visitors;
     private String created_at;
     private String updated_at;
@@ -151,6 +153,22 @@ public class MemberModel {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getProfile_pic_url() {
+        return profile_pic_url;
+    }
+
+    public void setProfile_pic_url(String profile_pic_url) {
+        this.profile_pic_url = profile_pic_url;
+    }
+
+    public String getBarcode_url() {
+        return barcode_url;
+    }
+
+    public void setBarcode_url(String barcode_url) {
+        this.barcode_url = barcode_url;
     }
 
     public List<VisitorModel> getVisitors() {

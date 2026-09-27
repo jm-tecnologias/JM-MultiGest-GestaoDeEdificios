@@ -33,13 +33,7 @@ public class LoginController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
             userService = new UserService();
-        } catch (IOException ex) {
-            System.out.println("Erro (IOException) inicializando servico de user"+ ex);
-        } catch (InterruptedException ex) {
-            System.out.println("Erro (InterruptedException) inicializando servico de user"+ ex);
-        }
     }
     
     @FXML
@@ -49,6 +43,7 @@ public class LoginController implements Initializable{
         user.setPassword(passwordPasswordField.getText());
         try{
             UserEmployeeModel x = userService.login(user);
+            System.out.println(x.getUser().getDescription());
             if( x != null){
                 DataTransfer.setUserData(x);
                 App.setRoot("main");

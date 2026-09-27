@@ -4,6 +4,8 @@
  */
 package jmmultigest.client;
 
+import java.util.List;
+
 /**
  *
  * @author JM-Tecnologias
@@ -13,23 +15,25 @@ public class VisitorModel {
     private int member_id;
     private String name;
     private String phone;
-    private String date;
-    private String time;
+    private String visitor_date;
+    private String visitor_time;
     private String description;
     private String status;
     private String token;
     private String created_at;
     private String updated_at;
+    private List<VisitorCheckInOutModel> visitor_check_historic;
+    
 
     public VisitorModel() {
     }
 
-    public VisitorModel(int member_id, String name, String phone, String date, String time, String description, String status) {
+    public VisitorModel(int member_id, String name, String phone, String visitor_date, String visitor_time, String description, String status) {
         this.member_id = member_id;
         this.name = name;
         this.phone = phone;
-        this.date = date;
-        this.time = time;
+        this.visitor_date = visitor_date;
+        this.visitor_time = visitor_time;
         this.description = description;
         this.status = status;
     }
@@ -66,20 +70,20 @@ public class VisitorModel {
         this.phone = phone;
     }
 
-    public String getDate() {
-        return date;
+    public String getVisitor_date() {
+        return visitor_date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setVisitor_date(String visitor_date) {
+        this.visitor_date = visitor_date;
     }
 
-    public String getTime() {
-        return time;
+    public String getVisitor_time() {
+        return visitor_time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setVisitor_time(String visitor_time) {
+        this.visitor_time = visitor_time;
     }
 
     public String getDescription() {
@@ -120,6 +124,14 @@ public class VisitorModel {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public List<VisitorCheckInOutModel> getVisitor_check_historic() {
+        return visitor_check_historic;
+    }
+
+    public void setVisitor_check_historic(List<VisitorCheckInOutModel> visitor_check_historic) {
+        this.visitor_check_historic = visitor_check_historic;
     }
     
     

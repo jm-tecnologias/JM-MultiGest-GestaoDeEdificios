@@ -12,6 +12,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import jmmultigest.utils.APIHelpper;
 import jmmultigest.utils.ApiException;
 
 /**
@@ -20,23 +21,13 @@ import jmmultigest.utils.ApiException;
  */
 public class MemberService {
 
-    private static final String API_URL = "http://127.0.0.1:8000";
-    private final HttpClient httpClient;
-    ;
-    private final ObjectMapper objectMapper;
-
-    public MemberService() throws IOException, InterruptedException {
-        this.httpClient = HttpClient.newHttpClient();
-        this.objectMapper = new ObjectMapper();
-    }
-
     public MemberModel create(MemberModel member) throws JsonProcessingException,
             IOException, InterruptedException, ApiException {
-        String jsonBody = objectMapper.writeValueAsString(member);
+        String jsonBody = APIHelpper.objectMapper.writeValueAsString(member);
 //        System.out.println("JSON Envioado: " + jsonBody);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL + "/building/clients/members/register"))
+                .uri(URI.create(APIHelpper.URL + "/building/clients/members/register"))
                 .header(
                         "Content-Type",
                         "application/json"
@@ -50,7 +41,7 @@ public class MemberService {
                                 .ofString(jsonBody)
                 )
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString());
 
@@ -60,7 +51,7 @@ public class MemberService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -72,15 +63,15 @@ public class MemberService {
                     message
             );
         }
-        return objectMapper.readValue(jsonResponse, MemberModel.class);
+        return APIHelpper.objectMapper.readValue(jsonResponse, MemberModel.class);
     }
     
     public MemberModel update(int id, MemberModel member) throws JsonProcessingException, IOException, InterruptedException, ApiException {
-        String jsonBody = objectMapper.writeValueAsString(member);
+        String jsonBody = APIHelpper.objectMapper.writeValueAsString(member);
 //        System.out.println("JSON Envioado: " + jsonBody);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL + "/building/clients/members/update/" + id))
+                .uri(URI.create(APIHelpper.URL + "/building/clients/members/update/" + id))
                 .header(
                         "Content-Type",
                         "application/json"
@@ -92,7 +83,7 @@ public class MemberService {
                 .method("PATCH", HttpRequest.BodyPublishers
                         .ofString(jsonBody))
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString());
 
@@ -103,7 +94,7 @@ public class MemberService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -115,7 +106,7 @@ public class MemberService {
                     message
             );
         }
-        return objectMapper.readValue(jsonResponse, MemberModel.class);
+        return APIHelpper.objectMapper.readValue(jsonResponse, MemberModel.class);
     }
 
 //    public static void main(String[] args) throws IOException, InterruptedException, ApiException {

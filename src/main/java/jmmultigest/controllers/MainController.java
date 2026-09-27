@@ -48,17 +48,8 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         user = DataTransfer.getUserData();
-        try {
-            buildService = new BuildingService();
-        } catch (IOException ex) {
-            ErroUtil.showError("Erro de comunicação",
-                    "Não foi possível comunicar com a API.");
-            ex.printStackTrace();
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-            ErroUtil.showError("Operação interrompida",
-                    "A comunicação com o servidor foi interrompida.");
-        }
+        buildService = new BuildingService();
+        
     }
     
     

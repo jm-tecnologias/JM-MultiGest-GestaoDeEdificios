@@ -14,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import jmmultigest.utils.APIHelpper;
 import jmmultigest.utils.ApiException;
 
 /**
@@ -22,23 +23,13 @@ import jmmultigest.utils.ApiException;
  */
 public class ClientService {
 
-    private static final String API_URL = "http://127.0.0.1:8000";
-    private final HttpClient httpClient;
-    ;
-    private final ObjectMapper objectMapper;
-
-    public ClientService() throws IOException, InterruptedException {
-        this.httpClient = HttpClient.newHttpClient();
-        this.objectMapper = new ObjectMapper();
-    }
-
     public List<ClientModel> getData() throws IOException, InterruptedException, ApiException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(API_URL + "/building/clients/list-all"))
+                .uri(URI.create(APIHelpper.URL + "/building/clients/list-all"))
                 .GET()
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
@@ -48,7 +39,7 @@ public class ClientService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -61,18 +52,18 @@ public class ClientService {
             );
         }
 
-        return objectMapper.readValue(jsonResponse,
+        return APIHelpper.objectMapper.readValue(jsonResponse,
                 new TypeReference<List<ClientModel>>() {
         });
 
     }
 
     public ClientModel create(ClientModel client) throws JsonProcessingException, IOException, InterruptedException, ApiException {
-        String jsonBody = objectMapper.writeValueAsString(client);
+        String jsonBody = APIHelpper.objectMapper.writeValueAsString(client);
 //        System.out.println("JSON Envioado: " + jsonBody);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL + "/building/clients/register"))
+                .uri(URI.create(APIHelpper.URL + "/building/clients/register"))
                 .header(
                         "Content-Type",
                         "application/json"
@@ -86,7 +77,7 @@ public class ClientService {
                                 .ofString(jsonBody)
                 )
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString());
 
@@ -97,7 +88,7 @@ public class ClientService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -109,15 +100,15 @@ public class ClientService {
                     message
             );
         }
-        return objectMapper.readValue(jsonResponse, ClientModel.class);
+        return APIHelpper.objectMapper.readValue(jsonResponse, ClientModel.class);
     }
 
     public ClientModel update(int id, ClientModel client) throws JsonProcessingException, IOException, InterruptedException, ApiException {
-        String jsonBody = objectMapper.writeValueAsString(client);
+        String jsonBody = APIHelpper.objectMapper.writeValueAsString(client);
 //        System.out.println("JSON Envioado: " + jsonBody);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL + "/building/clients/update/" + id))
+                .uri(URI.create(APIHelpper.URL + "/building/clients/update/" + id))
                 .header(
                         "Content-Type",
                         "application/json"
@@ -129,7 +120,7 @@ public class ClientService {
                 .method("PATCH", HttpRequest.BodyPublishers
                         .ofString(jsonBody))
                 .build();
-        HttpResponse<String> response = httpClient.send(
+        HttpResponse<String> response = APIHelpper.httpClient.send(
                 request,
                 HttpResponse.BodyHandlers.ofString());
 
@@ -140,7 +131,7 @@ public class ClientService {
             String message = "Erro desconhecido.";
             try {
                 JsonNode errorJson
-                        = objectMapper.readTree(response.body());
+                        = APIHelpper.objectMapper.readTree(response.body());
                 if (errorJson.has("detail")) {
                     message = errorJson.get("detail").asText();
                 }
@@ -152,7 +143,7 @@ public class ClientService {
                     message
             );
         }
-        return objectMapper.readValue(jsonResponse, ClientModel.class);
+        return APIHelpper.objectMapper.readValue(jsonResponse, ClientModel.class);
     }
 
 //    public static void main(String[] args) throws IOException, InterruptedException, JsonProcessingException, ApiException {
