@@ -27,6 +27,7 @@ public class MemberModel {
     private String profile_pic_url;
     private String barcode_url;
     private List<VisitorModel> visitors;
+    private List<MemberCheckInOutModel> checkedStatus;
     private String created_at;
     private String updated_at;
 
@@ -36,7 +37,6 @@ public class MemberModel {
     public MemberModel(int user_id, int client_id, int apartment_id, 
             String doc_id, String name, String surname, String phone,
             String email, String description, String client_relationship
-            , List<VisitorModel> visitors
     ) {
         this.user_id = user_id;
         this.client_id = client_id;
@@ -177,6 +177,14 @@ public class MemberModel {
 
     public void setVisitors(List<VisitorModel> visitors) {
         this.visitors = visitors;
+    }
+
+    public List<MemberCheckInOutModel> getCheckedStatus() {
+        return checkedStatus;
+    }
+
+    public void setCheckedStatus(List<MemberCheckInOutModel> checkedStatus) {
+        this.checkedStatus = checkedStatus;
     }
 
     public String getCreated_at() {
