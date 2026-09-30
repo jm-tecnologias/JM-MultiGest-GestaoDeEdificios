@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -36,19 +35,14 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
-                  <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                  <Region minWidth="0.0" prefHeight="57.0" prefWidth="332.0" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER" prefHeight="57.0" prefWidth="294.0" spacing="10.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" prefWidth="80.0" styleClass="access-toggle" text="Membro">
+                        <Label fx:id="flagLabel" prefHeight="35.0" prefWidth="223.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
-                        </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefWidth="80.0" styleClass="access-toggle" text="Visitante">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </ToggleButton>
+                        </Label>
                      </children>
                   </HBox>
                </children>
@@ -81,7 +75,7 @@
                               <TextField fx:id="scanField" maxWidth="1.7976931348623157E308" promptText="Digite o Token ou Codigo" styleClass="token-field">
                                  <font><Font size="14.0" /></font>
                               </TextField>
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scanMember" prefHeight="30.0" styleClass="primary-button" text="Verificar">
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chooseAction" prefHeight="30.0" styleClass="primary-button" text="Verificar">
                                  <font><Font name="System Bold" size="16.0" /></font>
                               </Button>
                            </children>

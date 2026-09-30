@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -27,7 +28,9 @@ import jmmultigest.member.MemberService;
 import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
 import jmmultigest.utils.ErroUtil;
+import jmmultigest.visitor.VisitorMemberApartmentModel;
 import jmmultigest.visitor.VisitorModel;
+import jmmultigest.visitor.VisitorService;
 
 /**
  *
@@ -37,9 +40,14 @@ public class PortariaController implements Initializable{
     private UserEmployeeModel user;
     private BuildModel build;
     private MemberService memberService;
+    private VisitorService visitorService;
     private MemberApartmentModel memberResponse;
+    private VisitorMemberApartmentModel visitorResponse;
     private ObservableList<MemberCheckInOutModel> listaMembroChekInOut;
     private ObservableList<VisitorCheckInOutModel> listaVisitantes;
+    
+    @FXML
+    private Label flagLabel;
 
     /*
     *
@@ -100,12 +108,24 @@ public class PortariaController implements Initializable{
         user = DataTransfer.getUserData();
         build = DataTransfer.getBuildingData();
         memberService = new MemberService();
+        visitorService = new VisitorService();
+    }
+    @FXML
+    void chooseAction(ActionEvent e){
+        String[] idScanned = scanField.getText().split("-");
+        if(idScanned[0].toLowerCase().startsWith("m")){
+            scanMember(Integer.parseInt(idScanned[1]));
+            flagLabel.setText("MEMBRO");
+        }
+        if(idScanned[0].toLowerCase().startsWith("v")){
+            scanVisitor(Integer.parseInt(idScanned[1]));
+            flagLabel.setText("VISITANTE");
+        }
     }
     
-    @FXML
-    void scanMember(){
+    void scanMember(int id){
         try{
-            memberResponse = memberService.getMemberData(1);
+            memberResponse = memberService.getMemberData(id);
             nomeFieldMembro.setText(memberResponse.getMember().getSurname()+", "+memberResponse.getMember().getName());
             telefoneFieldMembro.setText(memberResponse.getMember().getPhone());
             emailFieldMembro.setText(memberResponse.getMember().getEmail());
@@ -134,6 +154,44 @@ public class PortariaController implements Initializable{
         }
     }
     
+    void scanVisitor(int id){
+        try{
+            visitorResponse = visitorService.getVisitorData(id);
+            nomeFieldVisitante.setText(visitorResponse.getVisitor().getName());
+            dataFieldVisitante.setText(visitorResponse.getVisitor().getVisitor_date());
+            horaFieldVisitante.setText(visitorResponse.getVisitor().getVisitor_time());
+            telefoneFieldVisitante.setText(visitorResponse.getVisitor().getPhone());
+            estadoLabelVisitante.setText(visitorResponse.getVisitor().getStatus());
+            
+            nomeFieldMembro.setText(visitorResponse.getMember().getSurname()+", "+visitorResponse.getMember().getName());
+            telefoneFieldMembro.setText(visitorResponse.getMember().getPhone());
+            emailFieldMembro.setText(visitorResponse.getMember().getEmail());
+            estadoLabelMembro.setText(visitorResponse.getMember().isStatus() == true ? "Activo" : "Desactivo");
+            
+            pisoBlocoField.setText("Piso/Bloco "+visitorResponse.getApartment().getFloor());
+            numeroField.setText(visitorResponse.getApartment().getNumber());
+            descricaoField.setText(visitorResponse.getApartment().getDescription());
+            
+            showVisitorCheckInOutHistoric(visitorResponse.getVisitor().getVisitor_check_historic());
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao Consultar dados do Membro",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "* Mensagem por ser melhorada...");
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+    }
+    
     void showMemberCheckInOutHistoric(List<MemberCheckInOutModel> lista){
         listaMembroChekInOut = FXCollections.observableArrayList(lista);
         estadoColumnMembro.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -141,7 +199,7 @@ public class PortariaController implements Initializable{
         membroTabela.setItems(listaMembroChekInOut);
     }
     
-    void showVisitorHistoricStatus(List<VisitorCheckInOutModel> lista){
+    void showVisitorCheckInOutHistoric(List<VisitorCheckInOutModel> lista){
         listaVisitantes = FXCollections.observableArrayList(lista);
         System.out.println("Size: "+listaVisitantes.size());
         
