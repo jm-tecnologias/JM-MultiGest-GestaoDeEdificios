@@ -4,6 +4,7 @@
  */
 package jmmultigest.client;
 
+import jmmultigest.member.MemberModel;
 import java.util.List;
 import jmmultigest.historic.HistoricModel;
 

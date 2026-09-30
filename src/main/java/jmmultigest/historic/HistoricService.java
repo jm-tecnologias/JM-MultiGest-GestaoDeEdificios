@@ -14,7 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
-import jmmultigest.client.MemberModel;
+import jmmultigest.member.MemberModel;
 import jmmultigest.utils.APIHelpper;
 import jmmultigest.utils.ApiException;
 

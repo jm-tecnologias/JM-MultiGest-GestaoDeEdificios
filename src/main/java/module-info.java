@@ -15,6 +15,9 @@ module jmmultigest {
     exports jmmultigest.employee;
     exports jmmultigest.historic;
     exports jmmultigest.auth;
+    exports jmmultigest.member;
+    exports jmmultigest.visitor;
+    exports jmmultigest.checkINOUT;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires java.net.http;

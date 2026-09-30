@@ -29,8 +29,8 @@ import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.client.ClientModel;
 import jmmultigest.client.ClientService;
-import jmmultigest.client.MemberModel;
-import jmmultigest.client.MemberService;
+import jmmultigest.member.MemberModel;
+import jmmultigest.member.MemberService;
 import jmmultigest.historic.HistoricModel;
 import jmmultigest.historic.HistoricService;
 import jmmultigest.utils.ApiException;
@@ -163,7 +163,7 @@ public class NovoCliententroller implements Initializable{
             historic.setDescription(historicoObservacoesArea.getText());
             historicService.create(historic);
         } catch (ApiException ex) {
-            ErroUtil.showError("Erro ao historico ocupacional do Cliente",ex.getMessage());
+            ErroUtil.showError("Erro ao registar historico ocupacional do Cliente",ex.getMessage());
         } catch (NumberFormatException ex) {
             ErroUtil.showError(
                 "Dados inválidos",
