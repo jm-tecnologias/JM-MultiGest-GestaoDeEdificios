@@ -21,11 +21,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.checkINOUT.MemberCheckInOutModel;
+import jmmultigest.checkINOUT.VisitorCheckInOutModel;
 import jmmultigest.member.MemberApartmentModel;
 import jmmultigest.member.MemberService;
 import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
 import jmmultigest.utils.ErroUtil;
+import jmmultigest.visitor.VisitorModel;
 
 /**
  *
@@ -37,6 +39,7 @@ public class PortariaController implements Initializable{
     private MemberService memberService;
     private MemberApartmentModel memberResponse;
     private ObservableList<MemberCheckInOutModel> listaMembroChekInOut;
+    private ObservableList<VisitorCheckInOutModel> listaVisitantes;
 
     /*
     *
@@ -82,9 +85,9 @@ public class PortariaController implements Initializable{
     *
     * 
     */ 
-    @FXML private TableView<?> visitanteTabela;
-    @FXML private TableColumn<?, ?> estadoColumnVisitante;
-    @FXML private TableColumn<?, ?> notasColumnVisitante;
+    @FXML private TableView<VisitorCheckInOutModel> visitanteTabela;
+    @FXML private TableColumn<VisitorCheckInOutModel, String> estadoColumnVisitante;
+    @FXML private TableColumn<VisitorCheckInOutModel, String> notasColumnVisitante;
     
     /*
     *
@@ -100,7 +103,7 @@ public class PortariaController implements Initializable{
     }
     
     @FXML
-    void showMember(){
+    void scanMember(){
         try{
             memberResponse = memberService.getMemberData(1);
             nomeFieldMembro.setText(memberResponse.getMember().getSurname()+", "+memberResponse.getMember().getName());
@@ -137,22 +140,13 @@ public class PortariaController implements Initializable{
         notasColumnMembro.setCellValueFactory(new PropertyValueFactory<>("note"));
         membroTabela.setItems(listaMembroChekInOut);
     }
-//    private void fetchData() {
-//        Thread thread = new Thread(() -> {
-//            try {
-//                List<MemberApartmentModel> memberResult = memberService.getClients();
-//                Platform.runLater(() -> {
-//                    listaClientes.clear();
-//                    listaClientes.addAll(clientResult);
-//                });
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                Platform.runLater(() -> {
-//                    System.out.println("Erro: " + e.getMessage());
-//                });
-//            }
-//        });
-//        thread.setDaemon(true);
-//        thread.start();
-//    }
+    
+    void showVisitorHistoricStatus(List<VisitorCheckInOutModel> lista){
+        listaVisitantes = FXCollections.observableArrayList(lista);
+        System.out.println("Size: "+listaVisitantes.size());
+        
+        estadoColumnVisitante.setCellValueFactory(new PropertyValueFactory<>("status"));
+        notasColumnVisitante.setCellValueFactory(new PropertyValueFactory<>("note"));
+        visitanteTabela.setItems(listaVisitantes);
+    }
 }

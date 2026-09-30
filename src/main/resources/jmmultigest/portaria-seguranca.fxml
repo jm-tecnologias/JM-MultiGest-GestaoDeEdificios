@@ -81,7 +81,7 @@
                               <TextField fx:id="scanField" maxWidth="1.7976931348623157E308" promptText="Digite o Token ou Codigo" styleClass="token-field">
                                  <font><Font size="14.0" /></font>
                               </TextField>
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMember" prefHeight="30.0" styleClass="primary-button" text="Verificar">
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scanMember" prefHeight="30.0" styleClass="primary-button" text="Verificar">
                                  <font><Font name="System Bold" size="16.0" /></font>
                               </Button>
                            </children>
