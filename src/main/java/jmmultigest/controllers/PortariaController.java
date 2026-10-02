@@ -24,6 +24,7 @@ import jmmultigest.building.BuildModel;
 import jmmultigest.checkINOUT.MemberCheckInOutModel;
 import jmmultigest.checkINOUT.MemberCheckInOutService;
 import jmmultigest.checkINOUT.VisitorCheckInOutModel;
+import jmmultigest.checkINOUT.VisitorCheckInOutService;
 import jmmultigest.member.MemberApartmentModel;
 import jmmultigest.member.MemberModel;
 import jmmultigest.member.MemberService;
@@ -46,6 +47,7 @@ public class PortariaController implements Initializable{
     private MemberService memberService;
     private VisitorService visitorService;
     private MemberCheckInOutService memberCheckInOutService;
+    private VisitorCheckInOutService visitorCheckInOutService;
     private MemberApartmentModel memberResponse;
     private VisitorMemberApartmentModel visitorResponse;
     private ObservableList<MemberCheckInOutModel> listaMembroChekInOut;
@@ -68,6 +70,7 @@ public class PortariaController implements Initializable{
     @FXML private TextField horaFieldVisitante;
     @FXML private TextField telefoneFieldVisitante;
     @FXML private Label estadoLabelVisitante;
+    @FXML private TextArea descricaoVisitanteField;
     
     @FXML private TextArea notasField;
     
@@ -115,7 +118,22 @@ public class PortariaController implements Initializable{
         memberService = new MemberService();
         visitorService = new VisitorService();
         memberCheckInOutService = new MemberCheckInOutService();
+        visitorCheckInOutService = new VisitorCheckInOutService();
+        setTableWidth();
     }
+    
+    void setTableWidth(){
+        estadoColumnMembro.prefWidthProperty()
+                .bind(membroTabela.widthProperty().multiply(0.25));
+        notasColumnMembro.prefWidthProperty()
+                .bind(membroTabela.widthProperty().multiply(0.75));
+        
+        estadoColumnVisitante.prefWidthProperty()
+                .bind(visitanteTabela.widthProperty().multiply(0.25));
+        notasColumnVisitante.prefWidthProperty()
+                .bind(visitanteTabela.widthProperty().multiply(0.75));
+    }
+    
     @FXML
     void chooseAction(ActionEvent e){
         String[] idScanned = scanField.getText().split("-");
@@ -132,8 +150,28 @@ public class PortariaController implements Initializable{
             notasField.setPromptText("Notas...");
         }
     }
+    @FXML
+    void chooseCheckInAction(ActionEvent e){
+        String[] idScanned = scanField.getText().split("-");
+        if(idScanned[0].toLowerCase().startsWith("m")){
+            saveCheckInMembro();
+        }
+        if(idScanned[0].toLowerCase().startsWith("v")){
+            saveCheckInVisitor();
+        }
+    }
     
     @FXML
+    void chooseCheckOutAction(ActionEvent e){
+        String[] idScanned = scanField.getText().split("-");
+        if(idScanned[0].toLowerCase().startsWith("m")){
+            saveCheckOutMembro();
+        }
+        if(idScanned[0].toLowerCase().startsWith("v")){
+            saveCheckOutVisitor();
+        }
+    }
+    
     void saveCheckInMembro(){
         MemberCheckInOutModel model;
         try{
@@ -159,7 +197,7 @@ public class PortariaController implements Initializable{
         }
     }
     
-    @FXML
+   
     void saveCheckOutMembro(){
         MemberCheckInOutModel model;
         try{
@@ -168,6 +206,83 @@ public class PortariaController implements Initializable{
             memberCheckInOutService.create(model);
         } catch (ApiException ex) {
             ErroUtil.showError("Erro ao Registar Check Out do Anfitrião",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "* Mensagem por ser melhorada...");
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+    }
+    
+    void saveCheckInVisitor(){
+        VisitorCheckInOutModel model;
+        try{
+            model = new VisitorCheckInOutModel(visitor.getId(), user.getUser().getId(),
+                    "Check In", notasField.getText());
+            visitorCheckInOutService.create(model);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao Registar Check In do Visitante",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "* Mensagem por ser melhorada...");
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+    }
+    
+    
+    void saveCheckOutVisitor(){
+        VisitorCheckInOutModel model;
+        try{
+            model = new VisitorCheckInOutModel(visitor.getId(), user.getUser().getId(),
+                    "Check Out", notasField.getText());
+            visitorCheckInOutService.create(model);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao Registar Check Out do Visitante",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "* Mensagem por ser melhorada...");
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+    }
+    
+    @FXML
+    void saveVisitorBreak(ActionEvent e){
+        VisitorCheckInOutModel model;
+        try{
+            model = new VisitorCheckInOutModel(visitor.getId(), user.getUser().getId(),
+                    "Visitante solicitou saida", notasField.getText());
+            visitorCheckInOutService.create(model);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao registar saida solicitada do Visitante",ex.getMessage());
         } catch (NumberFormatException ex) {
             ErroUtil.showError(
                 "Dados inválidos",
@@ -219,7 +334,7 @@ public class PortariaController implements Initializable{
         return member; 
     }
     
-    void scanVisitor(int id){
+    VisitorModel scanVisitor(int id){
         try{
             visitorResponse = visitorService.getVisitorData(id);
             nomeFieldVisitante.setText(visitorResponse.getVisitor().getName());
@@ -227,6 +342,7 @@ public class PortariaController implements Initializable{
             horaFieldVisitante.setText(visitorResponse.getVisitor().getVisitor_time());
             telefoneFieldVisitante.setText(visitorResponse.getVisitor().getPhone());
             estadoLabelVisitante.setText(visitorResponse.getVisitor().getStatus());
+            descricaoVisitanteField.setText(visitorResponse.getVisitor().getDescription());
             
             nomeFieldMembro.setText(visitorResponse.getMember().getSurname()+", "+visitorResponse.getMember().getName());
             telefoneFieldMembro.setText(visitorResponse.getMember().getPhone());
@@ -238,6 +354,7 @@ public class PortariaController implements Initializable{
             descricaoField.setText(visitorResponse.getApartment().getDescription());
             
             showVisitorCheckInOutHistoric(visitorResponse.getVisitor().getVisitor_check_historic());
+            visitor = visitorResponse.getVisitor();
         } catch (ApiException ex) {
             ErroUtil.showError("Erro ao Consultar dados do Membro",ex.getMessage());
         } catch (NumberFormatException ex) {
@@ -255,6 +372,7 @@ public class PortariaController implements Initializable{
                 "Operação interrompida",
                 "A comunicação com o servidor foi interrompida.");
         }
+        return visitor;
     }
     
     void showMemberCheckInOutHistoric(List<MemberCheckInOutModel> lista){

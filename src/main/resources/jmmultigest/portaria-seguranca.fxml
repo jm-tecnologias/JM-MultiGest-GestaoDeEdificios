@@ -97,7 +97,7 @@
 
                               <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="5.0" styleClass="identity-block" GridPane.columnIndex="0">
                                  <children>
-                                    <Label styleClass="section-title-small" text="Membro">
+                                    <Label styleClass="section-title-small" text="Anfitrião">
                                        <font><Font name="System Bold" size="16.0" /></font>
                                     </Label>
                                     <TextField fx:id="nomeFieldMembro" editable="false" maxWidth="1.7976931348623157E308" promptText="Nome" styleClass="token-field">
@@ -163,23 +163,28 @@
                                  </children>
                               </VBox>
 
-                              <TextArea fx:id="notasField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="49.0" minWidth="0.0" prefHeight="49.0" prefWidth="533.0" promptText="Notas..." styleClass="notes-area" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                              <TextArea fx:id="notasField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="49.0" minWidth="0.0" prefHeight="49.0" prefWidth="533.0" promptText="Notas . . ." styleClass="notes-area" wrapText="true" GridPane.rowIndex="1">
                                  <font><Font size="14.0" /></font>
                               </TextArea>
 
                               <HBox alignment="CENTER" spacing="5.0" styleClass="action-row" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#saveCheckIn" prefWidth="170.0" styleClass="secondary-button" text="Check-In" HBox.hgrow="ALWAYS">
+                                    <Button mnemonicParsing="false" onAction="#chooseCheckInAction" prefWidth="170.0" styleClass="secondary-button" text="Check-In" HBox.hgrow="ALWAYS">
                                        <font><Font name="System Bold" size="16.0" /></font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#saveCheckOut" prefWidth="170.0" styleClass="secondary-button" text="Check-Out" HBox.hgrow="ALWAYS">
+                                    <Button mnemonicParsing="false" onAction="#chooseCheckOutAction" prefWidth="170.0" styleClass="secondary-button" text="Check-Out" HBox.hgrow="ALWAYS">
                                        <font><Font name="System Bold" size="16.0" /></font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="170.0" styleClass="secondary-button" text="Break" HBox.hgrow="ALWAYS">
+                                    <Button mnemonicParsing="false" onAction="#saveVisitorBreak" prefWidth="170.0" styleClass="secondary-button" text="Break" HBox.hgrow="ALWAYS">
                                        <font><Font name="System Bold" size="16.0" /></font>
                                     </Button>
                                  </children>
                               </HBox>
+                              <TextArea fx:id="descricaoVisitanteField" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="49.0" minWidth="0.0" prefHeight="49.0" prefWidth="533.0" promptText="Descrição . . ." styleClass="notes-area" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextArea>
                            </children>
                            <padding><Insets bottom="8.0" left="8.0" right="8.0" top="8.0" /></padding>
                         </GridPane>
@@ -229,7 +234,7 @@
       
                         <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="5.0" GridPane.columnIndex="1">
                            <children>
-                              <Label styleClass="history-title" text="Historico de membro">
+                              <Label styleClass="history-title" text="Historico de anfitrião">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
                                  </font>
