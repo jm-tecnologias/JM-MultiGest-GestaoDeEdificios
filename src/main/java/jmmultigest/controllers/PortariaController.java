@@ -22,8 +22,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.checkINOUT.MemberCheckInOutModel;
+import jmmultigest.checkINOUT.MemberCheckInOutService;
 import jmmultigest.checkINOUT.VisitorCheckInOutModel;
 import jmmultigest.member.MemberApartmentModel;
+import jmmultigest.member.MemberModel;
 import jmmultigest.member.MemberService;
 import jmmultigest.utils.ApiException;
 import jmmultigest.utils.DataTransfer;
@@ -39,8 +41,11 @@ import jmmultigest.visitor.VisitorService;
 public class PortariaController implements Initializable{
     private UserEmployeeModel user;
     private BuildModel build;
+    private MemberModel member;
+    private VisitorModel visitor;
     private MemberService memberService;
     private VisitorService visitorService;
+    private MemberCheckInOutService memberCheckInOutService;
     private MemberApartmentModel memberResponse;
     private VisitorMemberApartmentModel visitorResponse;
     private ObservableList<MemberCheckInOutModel> listaMembroChekInOut;
@@ -109,21 +114,79 @@ public class PortariaController implements Initializable{
         build = DataTransfer.getBuildingData();
         memberService = new MemberService();
         visitorService = new VisitorService();
+        memberCheckInOutService = new MemberCheckInOutService();
     }
     @FXML
     void chooseAction(ActionEvent e){
         String[] idScanned = scanField.getText().split("-");
         if(idScanned[0].toLowerCase().startsWith("m")){
             scanMember(Integer.parseInt(idScanned[1]));
-            flagLabel.setText("MEMBRO");
+            flagLabel.setText("ANFITRIÃO");
+            notasField.clear();
+            notasField.setPromptText("Notas...");
         }
         if(idScanned[0].toLowerCase().startsWith("v")){
             scanVisitor(Integer.parseInt(idScanned[1]));
             flagLabel.setText("VISITANTE");
+            notasField.clear();
+            notasField.setPromptText("Notas...");
         }
     }
     
-    void scanMember(int id){
+    @FXML
+    void saveCheckInMembro(){
+        MemberCheckInOutModel model;
+        try{
+            model = new MemberCheckInOutModel(member.getId(), user.getUser().getId(),
+                    "Check In", notasField.getText());
+            memberCheckInOutService.create(model);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao Registar Check In do Anfitrião",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "* Mensagem por ser melhorada...");
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+    }
+    
+    @FXML
+    void saveCheckOutMembro(){
+        MemberCheckInOutModel model;
+        try{
+            model = new MemberCheckInOutModel(member.getId(), user.getUser().getId(),
+                    "Check Out", notasField.getText());
+            memberCheckInOutService.create(model);
+        } catch (ApiException ex) {
+            ErroUtil.showError("Erro ao Registar Check Out do Anfitrião",ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ErroUtil.showError(
+                "Dados inválidos",
+                "* Mensagem por ser melhorada...");
+        } catch (IOException ex) {
+            ErroUtil.showError(
+                "Erro de comunicação",
+                "Não foi possível comunicar com a API.");
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            ErroUtil.showError(
+                "Operação interrompida",
+                "A comunicação com o servidor foi interrompida.");
+        }
+    }
+    
+    MemberModel scanMember(int id){
+        
         try{
             memberResponse = memberService.getMemberData(id);
             nomeFieldMembro.setText(memberResponse.getMember().getSurname()+", "+memberResponse.getMember().getName());
@@ -135,6 +198,7 @@ public class PortariaController implements Initializable{
             descricaoField.setText(memberResponse.getApartment().getDescription());
             
             showMemberCheckInOutHistoric(memberResponse.getMember().getCheckedStatus());
+            member = memberResponse.getMember();
         } catch (ApiException ex) {
             ErroUtil.showError("Erro ao Consultar dados do Membro",ex.getMessage());
         } catch (NumberFormatException ex) {
@@ -152,6 +216,7 @@ public class PortariaController implements Initializable{
                 "Operação interrompida",
                 "A comunicação com o servidor foi interrompida.");
         }
+        return member; 
     }
     
     void scanVisitor(int id){
