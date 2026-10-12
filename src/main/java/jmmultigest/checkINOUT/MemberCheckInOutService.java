@@ -13,6 +13,7 @@ import java.net.http.HttpResponse;
 import jmmultigest.client.ClientModel;
 import jmmultigest.utils.APIHelpper;
 import jmmultigest.utils.ApiException;
+import jmmultigest.utils.DataTransfer;
 
 /**
  *
@@ -33,6 +34,10 @@ public class MemberCheckInOutService {
                 .header(
                         "Accept",
                         "application/json"
+                )
+                .header(
+                "Authorization",
+                "Bearer " + DataTransfer.getAccessToken()
                 )
                 .POST(
                         HttpRequest.BodyPublishers

@@ -4,7 +4,7 @@
  */
 package jmmultigest.utils;
 
-import jmmultigest.auth.UserEmployeeModel;
+import jmmultigest.auth.LoginTokenModel;
 import jmmultigest.building.BuildModel;
 
 /**
@@ -12,15 +12,16 @@ import jmmultigest.building.BuildModel;
  * @author JM-Tecnologias
  */
 public class DataTransfer {
-    private static UserEmployeeModel userData;
+
+    private static LoginTokenModel userData;
     private static BuildModel buildingData;
     private static Object otherData;
 
-    public static UserEmployeeModel getUserData() {
+    public static LoginTokenModel getUserData() {
         return userData;
     }
 
-    public static void setUserData(UserEmployeeModel userData) {
+    public static void setUserData(LoginTokenModel userData) {
         DataTransfer.userData = userData;
     }
 
@@ -39,6 +40,18 @@ public class DataTransfer {
     public static void setOtherData(Object otherData) {
         DataTransfer.otherData = otherData;
     }
-    
-    
+
+    public static String getAccessToken() {
+        LoginTokenModel userData = getUserData();
+
+        if (userData == null || userData.getAccess_token() == null
+                || userData.getAccess_token().isBlank()) {
+            throw new IllegalStateException(
+                    "Utilizador não autenticado. Faça login novamente."
+            );
+        }
+
+        return userData.getAccess_token();
+    }
+
 }

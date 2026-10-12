@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="594.0" prefWidth="837.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.PortariaController">
+<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="594.0" prefWidth="837.0" styleClass="mainFxmlClass" stylesheets="@../styles/dashboard_1.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.PortariaController">
    <children>
       <VBox minHeight="0.0" minWidth="0.0" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -62,25 +61,29 @@
                         <ColumnConstraints hgrow="ALWAYS" minWidth="420.0" percentWidth="68.0" />
                      </columnConstraints>
                      <children>
-                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="7.0" styleClass="scanner-panel" GridPane.columnIndex="0">
+                        <GridPane alignment="TOP_CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="192.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="93.0" minHeight="0.0" prefHeight="23.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
-                              <Label styleClass="section-title" text="Scan QR Code/Bar Code/Token">
-                                 <font><Font name="System Bold" size="16.0" /></font>
-                              </Label>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../../../Downloads/ChatGPT%20Image%20Sep%2010,%202026,%2011_45_35%20AM.png" />
-                                 </image>
-                              </ImageView>
-                              <TextField fx:id="scanField" maxWidth="1.7976931348623157E308" promptText="Digite o Token ou Codigo" styleClass="token-field">
-                                 <font><Font size="14.0" /></font>
+                              <ImageView fx:id="imageCode_or_ProfileImage" fitHeight="187.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <TextField fx:id="scanField" maxWidth="1.7976931348623157E308" promptText="Digite o Token ou Codigo" styleClass="token-field" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                               </TextField>
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chooseAction" prefHeight="30.0" styleClass="primary-button" text="Verificar">
-                                 <font><Font name="System Bold" size="16.0" /></font>
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chooseScanAction" prefHeight="30.0" styleClass="primary-button" text="Verificar" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
                               </Button>
                            </children>
-                           <padding><Insets bottom="8.0" top="8.0" /></padding>
-                        </VBox>
+                        </GridPane>
 
                         <!-- Painel direito preserva a mesma composição, agora com duas colunas simétricas. -->
                         <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="security-detail-panel" vgap="5.0" GridPane.columnIndex="1">
@@ -239,7 +242,7 @@
                                     <Font name="System Bold" size="22.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="membroTabela" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="management-table" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="membroTabela" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" onMouseClicked="#linhaSelecionadaMembro" styleClass="management-table" VBox.vgrow="ALWAYS">
                                  <columns>
                                     <TableColumn fx:id="estadoColumnMembro" prefWidth="85.0" text="Estado" />
                                     <TableColumn fx:id="notasColumnMembro" prefWidth="203.0" text="Notas" />
@@ -253,7 +256,7 @@
                               <Label styleClass="history-title" text="Historico de visitante">
                                  <font><Font name="System Bold" size="22.0" /></font>
                               </Label>
-                              <TableView fx:id="visitanteTabela" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="management-table" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="visitanteTabela" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" onMouseClicked="#linhaSelecionadaVisitante" styleClass="management-table" VBox.vgrow="ALWAYS">
                                  <columns>
                                     <TableColumn fx:id="estadoColumnVisitante" prefWidth="85.0" text="Estado" />
                                     <TableColumn fx:id="notasColumnVisitante" prefWidth="232.0" text="Notas" />

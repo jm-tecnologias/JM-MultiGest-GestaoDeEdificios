@@ -23,14 +23,12 @@ public class ApartmentModel {
     public ApartmentModel() {
     }
 
-    public ApartmentModel(String floor, String number, String type, String description, String occupation_state, int building_id, boolean status) {
+    public ApartmentModel(String floor, String number, String type, String description, int building_id) {
         this.floor = floor;
         this.number = number;
         this.type = type;
         this.description = description;
-        this.occupation_state = occupation_state;
         this.building_id = building_id;
-        this.status = status;
     }
 
     public int getId() {

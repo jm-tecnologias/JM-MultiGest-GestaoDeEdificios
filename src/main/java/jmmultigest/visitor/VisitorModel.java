@@ -19,6 +19,7 @@ public class VisitorModel {
     private String visitor_date;
     private String visitor_time;
     private String description;
+    private String barcode_url;
     private String status;
     private String token;
     private String created_at;
@@ -109,6 +110,14 @@ public class VisitorModel {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getBarcode_url() {
+        return barcode_url;
+    }
+
+    public void setBarcode_url(String barcode_url) {
+        this.barcode_url = barcode_url;
     }
 
     public String getCreated_at() {

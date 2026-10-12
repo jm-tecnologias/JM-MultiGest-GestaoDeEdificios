@@ -25,6 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jmmultigest.apartments.ApartmentModel;
+import jmmultigest.auth.LoginTokenModel;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.client.ClientModel;
@@ -43,7 +44,7 @@ import jmmultigest.utils.LoadAndMoveUtilities;
  * @author JM-Tecnologias
  */
 public class NovoCliententroller implements Initializable{
-    private UserEmployeeModel user;
+    private LoginTokenModel user;
     private BuildModel build;
     private ClientService clientService;
     private MemberService memberService;
@@ -155,7 +156,7 @@ public class NovoCliententroller implements Initializable{
         try {
             historic = new HistoricModel();
             historic.setClient_id(member.getClient_id());
-            historic.setUser_id(user.getUser().getId());
+            historic.setUser_id(user.getUser().getUserModel().getId());
             historic.setApartment_id(member.getApartment_id());
             historic.setOccupational_date(String.valueOf((entradaDatePicker.getValue() == null ? "" : entradaDatePicker.getValue())));
             historic.setFinal_date(String.valueOf((saidaDatePicker.getValue() == null ? "2626-01-01" : saidaDatePicker.getValue())));
@@ -187,7 +188,7 @@ public class NovoCliententroller implements Initializable{
         try {
             historic = new HistoricModel();
             historic.setClient_id(member.getClient_id());
-            historic.setUser_id(user.getUser().getId());
+            historic.setUser_id(user.getUser().getUserModel().getId());
             historic.setApartment_id(member.getApartment_id());
             historic.setOccupational_date(String.valueOf((entradaDatePicker.getValue() == null ? "" : entradaDatePicker.getValue())));
             historic.setFinal_date(String.valueOf((saidaDatePicker.getValue() == null ? "2626-01-01" : saidaDatePicker.getValue())));
@@ -218,7 +219,7 @@ public class NovoCliententroller implements Initializable{
         ClientModel model = new ClientModel();
         try {
             client = new ClientModel();
-            client.setUser_id(user.getUser().getId());
+            client.setUser_id(user.getUser().getUserModel().getId());
             client.setSurname(apelidoField.getText()+", "+nomeField.getText());
             client.setDescription(clientObservacoesArea.getText());
             client.setNum_members(Integer.parseInt(agregadoField.getText()));
@@ -249,7 +250,7 @@ public class NovoCliententroller implements Initializable{
         ClientModel model = new ClientModel();
         try {
             client = new ClientModel();
-            client.setUser_id(user.getUser().getId());
+            client.setUser_id(user.getUser().getUserModel().getId());
             client.setSurname(apelidoField.getText()+", "+nomeField.getText());
             client.setDescription(clientObservacoesArea.getText());
             client.setNum_members(Integer.parseInt(agregadoField.getText()));
@@ -286,7 +287,7 @@ public class NovoCliententroller implements Initializable{
         MemberModel model = new MemberModel();
         try {
             member = new MemberModel();
-            member.setUser_id(user.getUser().getId());
+            member.setUser_id(user.getUser().getUserModel().getId());
             member.setClient_id(client.getId());
             member.setDoc_id(docIDField.getText());
             member.setApartment_id(ap.getId());  
@@ -320,7 +321,7 @@ public class NovoCliententroller implements Initializable{
         MemberModel model = new MemberModel();
         try {
             member = new MemberModel();
-            member.setUser_id(user.getUser().getId());
+            member.setUser_id(user.getUser().getUserModel().getId());
             member.setClient_id(cli.getId());
             member.setDoc_id(docIDField.getText());
             member.setApartment_id(ap.getId());  

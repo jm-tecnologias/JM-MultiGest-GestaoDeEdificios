@@ -6,7 +6,6 @@ package jmmultigest.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -18,7 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import jmmultigest.apartments.ApartmentModel;
+import jmmultigest.auth.LoginTokenModel;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.client.ClientModel;
@@ -34,7 +33,7 @@ import jmmultigest.utils.LoadAndMoveUtilities;
  * @author JM-Tecnologias
  */
 public class NovoMembroController implements Initializable{
-    private UserEmployeeModel user;
+    private LoginTokenModel user;
     private BuildModel build;
     private MemberService memberService;
 
@@ -114,7 +113,7 @@ public class NovoMembroController implements Initializable{
         MemberModel model;
         try{
             model = new MemberModel();
-            model.setUser_id(user.getUser().getId());
+            model.setUser_id(user.getUser().getUserModel().getId());
             model.setClient_id(client.getId());
             model.setApartment_id(client.getMembers().get(0).getApartment_id());
             model.setDoc_id(docIDField.getText());
@@ -148,7 +147,7 @@ public class NovoMembroController implements Initializable{
         MemberModel member;
         try {
             member = new MemberModel();
-            member.setUser_id(user.getUser().getId());
+            member.setUser_id(user.getUser().getUserModel().getId());
             member.setClient_id(cli.getId());
             member.setDoc_id(docIDField.getText());
             member.setApartment_id(mem.getApartment_id());  

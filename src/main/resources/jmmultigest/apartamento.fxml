@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.ApartamentoController">
+<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@../styles/dashboard_1.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.ApartamentoController">
    <children>
       <VBox minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -44,7 +44,7 @@
             <Region minHeight="8.0" prefHeight="29.0" prefWidth="800.0" />
             <HBox minWidth="0.0" prefHeight="30.0" prefWidth="800.0" spacing="30.0" styleClass="filter-row">
                <children>
-                  <TextField minWidth="120.0" prefHeight="25.0" prefWidth="375.0" styleClass="filter-field" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="filterField" minWidth="120.0" prefHeight="25.0" prefWidth="375.0" styleClass="filter-field" HBox.hgrow="ALWAYS" />
                   <ComboBox minWidth="100.0" prefWidth="150.0" styleClass="filter-combo" />
                   <ComboBox minWidth="100.0" prefWidth="150.0" styleClass="filter-combo" />
                </children>
@@ -56,15 +56,15 @@
                </padding>
             </HBox>
             <Region minHeight="8.0" prefHeight="29.0" prefWidth="800.0" />
-            <TableView minHeight="120.0" minWidth="0.0" prefHeight="432.0" prefWidth="800.0" styleClass="management-table" VBox.vgrow="ALWAYS">
+            <TableView fx:id="apartamentoTabela" minHeight="120.0" minWidth="0.0" prefHeight="432.0" prefWidth="800.0" styleClass="management-table" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn prefWidth="47.0" text="ID" />
-                <TableColumn prefWidth="78.0" text="Andar" />
-                  <TableColumn prefWidth="93.0" text="Numero" />
-                  <TableColumn prefWidth="112.0" text="Tipo" />
-                  <TableColumn prefWidth="115.0" text="Estado" />
-                  <TableColumn prefWidth="197.0" text="Descrição" />
-                  <TableColumn prefWidth="145.0" text="Ação" />
+                <TableColumn fx:id="idColumn" prefWidth="47.0" text="ID" />
+                <TableColumn fx:id="andarColumn" prefWidth="78.0" text="Andar" />
+                  <TableColumn fx:id="numeroColumn" prefWidth="93.0" text="Numero" />
+                  <TableColumn fx:id="tipoColumn" prefWidth="112.0" text="Tipo" />
+                  <TableColumn fx:id="estadoColumn" prefWidth="115.0" text="Estado" />
+                  <TableColumn fx:id="descricaoColumn" prefWidth="197.0" text="Descrição" />
+                  <TableColumn fx:id="acoesColumn" prefWidth="145.0" text="Ação" />
               </columns>
             </TableView>
          </children>

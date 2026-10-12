@@ -11,31 +11,31 @@ import jmmultigest.employee.EmployeeModel;
  * @author JM-Tecnologias
  */
 public class UserEmployeeModel {
-    private UserModel user;
-    private EmployeeModel employee;
+    private UserModel userModel;
+    private EmployeeModel employeeModel;
 
     public UserEmployeeModel() {
     }
 
-    public UserEmployeeModel(UserModel user, EmployeeModel employee) {
-        this.user = user;
-        this.employee = employee;
+    public UserEmployeeModel(UserModel userModel, EmployeeModel employeeModel) {
+        this.userModel = userModel;
+        this.employeeModel = employeeModel;
     }
 
-    public UserModel getUser() {
-        return user;
+    public UserModel getUserModel() {
+        return userModel;
     }
 
-    public void setUser(UserModel user) {
-        this.user = user;
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 
-    public EmployeeModel getEmployee() {
-        return employee;
+    public EmployeeModel getEmployeeModel() {
+        return employeeModel;
     }
 
-    public void setEmployee(EmployeeModel employee) {
-        this.employee = employee;
+    public void setEmployeeModel(EmployeeModel employeeModel) {
+        this.employeeModel = employeeModel;
     }
     
     

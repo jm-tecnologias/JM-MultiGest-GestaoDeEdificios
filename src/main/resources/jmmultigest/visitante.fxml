@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.VisitanteController">
+<AnchorPane id="AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@../styles/dashboard_1.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.VisitanteController">
    <children>
       <VBox minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -49,15 +49,15 @@
                </padding>
             </HBox>
             <Region minHeight="8.0" prefHeight="29.0" prefWidth="800.0" />
-            <TableView minHeight="120.0" minWidth="0.0" prefHeight="432.0" prefWidth="800.0" styleClass="management-table" VBox.vgrow="ALWAYS">
+            <TableView fx:id="visitanteTabela" minHeight="120.0" minWidth="0.0" prefHeight="432.0" prefWidth="800.0" styleClass="management-table" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn prefWidth="47.0" text="ID" />
-                  <TableColumn prefWidth="172.0" text="Visitante" />
-                  <TableColumn prefWidth="160.0" text="Anfitriâo (Membro)" />
-                  <TableColumn prefWidth="79.0" text="Data" />
-                  <TableColumn prefWidth="69.0" text="Hora" />
-                  <TableColumn prefWidth="113.0" text="Estado" />
-                  <TableColumn prefWidth="149.0" text="Ação" />
+                  <TableColumn fx:id="idColumn" prefWidth="47.0" text="ID" />
+                  <TableColumn fx:id="visitanteColumn" prefWidth="172.0" text="Visitante" />
+                  <TableColumn fx:id="anfitriaoColumn" prefWidth="160.0" text="Anfitriâo (Membro)" />
+                  <TableColumn fx:id="dataColumn" prefWidth="79.0" text="Data" />
+                  <TableColumn fx:id="horaColumn" prefWidth="69.0" text="Hora" />
+                  <TableColumn fx:id="estadoColumn" prefWidth="113.0" text="Estado" />
+                  <TableColumn fx:id="descricaoColumn" prefWidth="149.0" text="Descrição" />
                </columns>
             </TableView>
          </children>

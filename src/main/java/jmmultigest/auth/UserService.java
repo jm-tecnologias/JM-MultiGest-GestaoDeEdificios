@@ -21,11 +21,8 @@ import jmmultigest.utils.ApiException;
 public class UserService {
 
 
-    public UserEmployeeModel login(UserModel user) throws IOException, InterruptedException, ApiException {
+    public LoginTokenModel login(UserModel user) throws IOException, InterruptedException, ApiException {
         String jsonBody = APIHelpper.objectMapper.writeValueAsString(user);
-//        System.out.println("JSON Enviado:");
-//        System.out.println(jsonBody);
-
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(APIHelpper.URL + "/building/auth/user/employee/login"))
@@ -47,7 +44,6 @@ public class UserService {
                 HttpResponse.BodyHandlers.ofString()
         );
         String jsonResponse = response.body();
-//        System.out.println("Resposta: " + jsonResponse);
         if (response.statusCode() != 200) {
             String message = "Erro desconhecido.";
             try {
@@ -64,7 +60,7 @@ public class UserService {
                     message
             );
         }
-        return APIHelpper.objectMapper.readValue(jsonResponse, UserEmployeeModel.class);
+        return APIHelpper.objectMapper.readValue(jsonResponse, LoginTokenModel.class);
     }
 
 //    public static void main(String[] args) throws IOException, InterruptedException {

@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.NovoMembroController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@../styles/dashboard_1.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmmultigest.controllers.NovoMembroController">
     <children>
-        <VBox minHeight="0.0" minWidth="0.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox minHeight="0.0" minWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <HBox alignment="CENTER_LEFT" minWidth="0.0" prefHeight="62.0" style="-fx-background-color: #333;" styleClass="page-header">
                     <children>
@@ -169,6 +169,22 @@
                                         </GridPane>
                                     </children>
                                 </VBox>
+            
+                                              <HBox alignment="CENTER_RIGHT" minWidth="0.0" prefHeight="38.0" prefWidth="800.0" spacing="10.0" styleClass="form-actions">
+                                <children>
+                                    <Label styleClass="form-required-note" text="* Campos obrigatórios" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                                    <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="cancelarMembroButton" minWidth="100.0" mnemonicParsing="false" onAction="#close" styleClass="secondary-button" text="Cancelar" />
+                                    <Button fx:id="guardarMembroButton" minWidth="130.0" mnemonicParsing="false" onAction="#chooseAction" styleClass="primary-button" text="Guardar Membro" />
+                                </children>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                            </HBox>
                             </children>
                             <padding>
                                 <Insets bottom="14.0" left="2.0" right="2.0" top="10.0" />
@@ -179,21 +195,6 @@
                   <Insets left="5.0" right="5.0" />
                </padding>
                 </ScrollPane>
-
-                <HBox alignment="CENTER_RIGHT" minWidth="0.0" prefHeight="38.0" prefWidth="800.0" spacing="10.0" styleClass="form-actions">
-                    <children>
-                        <Label styleClass="form-required-note" text="* Campos obrigatórios" textFill="RED">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                        <Region minWidth="0.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="cancelarMembroButton" minWidth="100.0" mnemonicParsing="false" onAction="#close" styleClass="secondary-button" text="Cancelar" />
-                        <Button fx:id="guardarMembroButton" minWidth="130.0" mnemonicParsing="false" onAction="#chooseAction" styleClass="primary-button" text="Guardar Membro" />
-                    </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-                </HBox>
             </children>
         </VBox>
     </children>

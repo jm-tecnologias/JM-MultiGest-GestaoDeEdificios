@@ -111,10 +111,10 @@ public class MemberService {
     *
     
     */
-    public MemberApartmentModel getMemberData(int member_id) throws IOException, InterruptedException, ApiException {
+    public MemberApartmentModel getMemberData(String token) throws IOException, InterruptedException, ApiException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(APIHelpper.URL + "/building/clients/members/get/" + member_id))
+                .uri(URI.create(APIHelpper.URL + "/building/clients/members/get/" + token))
                 .GET()
                 .build();
         HttpResponse<String> response = APIHelpper.httpClient.send(

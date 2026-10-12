@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import jmmultigest.App;
+import jmmultigest.auth.LoginTokenModel;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.auth.UserModel;
 import jmmultigest.auth.UserService;
@@ -42,8 +43,8 @@ public class LoginController implements Initializable{
         user.setUsername(usernameTextField.getText());
         user.setPassword(passwordPasswordField.getText());
         try{
-            UserEmployeeModel x = userService.login(user);
-            System.out.println(x.getUser().getDescription());
+            LoginTokenModel x = userService.login(user);
+            System.out.println(x.getUser().getUserModel().getDescription());
             if( x != null){
                 DataTransfer.setUserData(x);
                 App.setRoot("main");

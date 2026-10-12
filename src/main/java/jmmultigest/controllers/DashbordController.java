@@ -7,6 +7,7 @@ package jmmultigest.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import jmmultigest.auth.LoginTokenModel;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.utils.DataTransfer;
 
@@ -15,7 +16,7 @@ import jmmultigest.utils.DataTransfer;
  * @author JM-Tecnologias
  */
 public class DashbordController implements Initializable{
-    private UserEmployeeModel user;
+    private LoginTokenModel user;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

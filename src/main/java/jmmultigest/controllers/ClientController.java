@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
+import jmmultigest.auth.LoginTokenModel;
 import jmmultigest.auth.UserEmployeeModel;
 import jmmultigest.building.BuildModel;
 import jmmultigest.client.ClientModel;
@@ -42,7 +43,7 @@ import jmmultigest.utils.LoadAndMoveUtilities;
  * @author JM-Tecnologias
  */
 public class ClientController implements Initializable{
-    private UserEmployeeModel user;
+    private LoginTokenModel user;
     private BuildModel build;
     
     @FXML private TableView<ClientModel> tabelaCliente;

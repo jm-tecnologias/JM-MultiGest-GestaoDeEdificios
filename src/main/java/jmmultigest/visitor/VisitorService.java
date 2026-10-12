@@ -4,11 +4,13 @@
  */
 package jmmultigest.visitor;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import jmmultigest.utils.APIHelpper;
 import jmmultigest.utils.ApiException;
 
@@ -18,10 +20,10 @@ import jmmultigest.utils.ApiException;
  */
 public class VisitorService {
     
-    public VisitorMemberApartmentModel getVisitorData(int visitor_id) throws IOException, InterruptedException, ApiException {
+    public VisitorMemberApartmentModel getVisitorData(String token) throws IOException, InterruptedException, ApiException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(APIHelpper.URL + "/building/visitors/get/" + visitor_id))
+                .uri(URI.create(APIHelpper.URL + "/building/visitors/get/" + token))
                 .GET()
                 .build();
         HttpResponse<String> response = APIHelpper.httpClient.send(
@@ -48,5 +50,39 @@ public class VisitorService {
         }
 
         return APIHelpper.objectMapper.readValue(jsonResponse, VisitorMemberApartmentModel.class);
+    }
+    
+    public List<VisitorMemberModel> listVisitors() throws IOException, InterruptedException, ApiException {
+        HttpRequest request = HttpRequest
+                .newBuilder()
+                .uri(URI.create(APIHelpper.URL + "/building/visitors/list-all"))
+                .GET()
+                .build();
+        HttpResponse<String> response = APIHelpper.httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString()
+        );
+        String jsonResponse = response.body();
+//        System.out.println("Resposta: "+jsonResponse);
+        if (response.statusCode() != 200 ) {
+            String message = "Erro desconhecido.";
+            try {
+                JsonNode errorJson
+                        = APIHelpper.objectMapper.readTree(response.body());
+                if (errorJson.has("detail")) {
+                    message = errorJson.get("detail").asText();
+                }
+            } catch (Exception ex) {
+                message = response.body();
+            }
+            throw new ApiException(
+                    response.statusCode(),
+                    message
+            );
+        }
+
+        return APIHelpper.objectMapper.readValue(jsonResponse,
+                new TypeReference<List<VisitorMemberModel>>() {
+        });
     }
 }
